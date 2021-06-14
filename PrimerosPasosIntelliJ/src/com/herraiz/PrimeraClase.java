@@ -1,6 +1,6 @@
 package com.herraiz;
 
-public class PrimerosPasos {
+public class PrimeraClase {
 
     /* Comentario multi línea,
     útil para explicar cosas largas

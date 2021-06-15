@@ -2,7 +2,7 @@ package com.herraiz;
 
 import java.util.Scanner;
 
-public class Entrada {
+public class Entrada_Scanner {
 
     public static void main(String[] args) {
 
@@ -21,6 +21,8 @@ public class Entrada {
         int edad_usuario = entrada.nextInt();
 
         System.out.println("Hola " + nombre_usuario + ". El año que viene tendrás " + (edad_usuario + 1) + " años."); // Importante el paréntesis
+
+        // Vídeo 15
 
     }
 

@@ -8,13 +8,13 @@ public class Bucle_While2 {
 
         public static void main(String[] args) {
 
-            int random_number = (int) (Math.random() * 100);
+            int random_number = (int)(Math.random() * 100);
 
-            int number = -1;
+            int number = 0;
 
             int attempts = 0;
 
-            while (random_number != number) {
+            do {
 
                 attempts++;
                 number = parseInt(JOptionPane.showInputDialog(null,
@@ -30,7 +30,7 @@ public class Bucle_While2 {
                             "El número buscado es mas alto");
                 }
 
-            }
+            } while (random_number != number);
 
             JOptionPane.showMessageDialog(null,
                     "Has acertado el número en " + attempts + " intentos");

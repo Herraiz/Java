@@ -20,11 +20,5 @@ public class Array_1 {
         for (int i : mi_matriz) {
             System.out.println(i);
         }
-
-        for (:
-             ) {
-            
-        }
-
     }
 }

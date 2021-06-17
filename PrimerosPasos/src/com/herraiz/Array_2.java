@@ -22,7 +22,7 @@ public class Array_2 {
         int[] random_matrix = new int[150];
 
         for (int i = 0; i < random_matrix.length; i++) {
-            random_matrix[i] = (int)Math.round(Math.random()*100);
+            random_matrix[i] = (int) Math.round(Math.random() * 100);
         }
 
         for (int number : random_matrix) {

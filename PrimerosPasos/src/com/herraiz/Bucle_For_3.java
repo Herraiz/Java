@@ -5,7 +5,7 @@ import javax.swing.*;
 import static java.lang.Integer.parseInt;
 
 
-public class Bucle_For3 {
+public class Bucle_For_3 {
 
     public static void main(String[] args) {
 

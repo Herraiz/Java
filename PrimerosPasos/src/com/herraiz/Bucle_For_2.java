@@ -2,7 +2,7 @@ package com.herraiz;
 
 import javax.swing.*;
 
-public class Bucle_For2 {
+public class Bucle_For_2 {
 
     public static void main(String[] args) {
 

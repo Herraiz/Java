@@ -1,6 +1,6 @@
 package com.herraiz;
 
-public class Bucle_For1 {
+public class Bucle_For_1 {
 
     public static void main(String[] args) {
 

@@ -2,7 +2,7 @@ package com.herraiz;
 
 import javax.swing.*;
 
-public class Bucle_While1 {
+public class Bucle_While_1 {
 
     public static void main(String[] args) {
 

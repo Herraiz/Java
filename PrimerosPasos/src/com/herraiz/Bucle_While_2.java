@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import static java.lang.Integer.parseInt;
 
-public class Bucle_While2 {
+public class Bucle_While_2 {
 
         public static void main(String[] args) {
 

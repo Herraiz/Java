@@ -6,7 +6,9 @@ public class Bucle_For2 {
 
     public static void main(String[] args) {
 
-        boolean arroba = false;
+        int arroba = 0;
+        boolean point = false;
+
         String email = JOptionPane.showInputDialog(null,
                 "Por favor, introduce tu correo electrónico",
                 "Aplicación de correo",
@@ -15,12 +17,15 @@ public class Bucle_For2 {
         for (int i = 0; i < email.length(); i++) {
 
             if (email.charAt(i) == '@') {
-                arroba = true;
-                break;
+                arroba++;
+            }
+
+            if (email.charAt(i) == '.') {
+                point = true;
             }
         }
 
-        if (arroba) {
+        if (arroba == 1 && point) {
             JOptionPane.showMessageDialog(null,
                     "Email correcto");
         } else {

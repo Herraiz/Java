@@ -4,8 +4,11 @@ public class Uso_Coche {
 
     public static void main(String[] args) {
 
-        /* INSTANCIAR LA CLASE - RENAULT ES UN EJEMPLO DE LA CLASE COCHE */
+        /* Instanciamos la clase Coche */
+        /* Renault es un ejemplo o instancia de la clase Coche */
         Coche Renault = new Coche();
+
+        Renault.ruedas = 3;
 
         System.out.println("Este coche tiene " + Renault.ruedas + " ruedas");
 

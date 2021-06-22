@@ -2,11 +2,11 @@ package poo;
 
 public class Coche {
 
-    private int wheels;
-    private int length;
-    private int width;
-    private int motor;
-    private int platform_weigth;
+    private final int wheels;
+    private final int length;
+    private final int width;
+    private final int motor;
+    private final int platform_weigth;
 
     private String color;
     private int final_weigth;
@@ -24,6 +24,7 @@ public class Coche {
         platform_weigth = 500;
 
     }
+
     /* Método getter para obtener el largo de una propiedad privada */
     public String[] get_properties() {
         /* Ventajas de Java y de usar el semicolon, return multilínea */
@@ -32,31 +33,26 @@ public class Coche {
                 String.valueOf(width), String.valueOf(motor),
                 String.valueOf(platform_weigth), String.valueOf(final_weigth),
                 Boolean.toString(leather_seats), Boolean.toString(air_conditioner)
-                };
+        };
     }
 
-    /* Método setter con parámetro */
-    public void set_color(String car_color) {
-        color = car_color;
+    public String get_seats() {
+        if (leather_seats) {
+            return "- Tiene asientos de cuero";
+        } else {
+            return "- No tiene asientos de cuero";
+        }
     }
 
     public void set_seats(String leather_seats) {
-        if (leather_seats.equals("yes")) {
-            this.leather_seats = true;
-        } else {
-            this.leather_seats = false;
-        }
+        this.leather_seats = leather_seats.equalsIgnoreCase("yes");
     }
 
-    public String get_seats(){
-        if (this.leather_seats) {
-            return "- Tiene asientos de cuero";
-        } else {
-            return "- Tiene asientos de cuero";
-        }
+    public void set_air_conditioner(String air_conditioner) {
+        this.air_conditioner = air_conditioner.equalsIgnoreCase("yes");
     }
 
-    public String get_air_conditioner(){
+    public String get_air_conditioner() {
         if (air_conditioner) {
             return "- Tiene aire acondicionado";
         } else {
@@ -67,4 +63,39 @@ public class Coche {
     public String get_color() {
         return color;
     }
+
+    /* Método setter con parámetro */
+    public void set_color(String car_color) {
+        color = car_color;
+    }
+
+    /* Setter y getter a la vez, ejemplo de lo que no se debe hacer */
+    public String calculate_final_weight() {
+        int bodywork = 500;
+        final_weigth = platform_weigth +  bodywork;
+
+        if (leather_seats) {
+            final_weigth += 50;
+        }
+
+        if (air_conditioner) {
+            final_weigth += 50;
+        }
+        return "- Su peso total es de  " + final_weigth + " kgs";
+    }
+
+    public int get_price() {
+        int final_price = 10000;
+
+        if (leather_seats) {
+            final_price += 2000;
+        }
+
+        if(air_conditioner) {
+            final_price += 1500;
+        }
+
+        return final_price;
+    }
+
 }

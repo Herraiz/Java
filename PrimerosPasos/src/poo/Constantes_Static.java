@@ -1,4 +1,4 @@
-package com.herraiz;
+package poo;
 
 public class Constantes_Static {
 
@@ -11,10 +11,10 @@ public class Constantes_Static {
 
         trabajador1.changeSection("RRHH");
 
-        System.out.println(trabajador1.getData());
-        System.out.println(trabajador2.getData());
-        System.out.println(trabajador3.getData());
-        System.out.println(trabajador4.getData());
+        System.out.println(trabajador1.getData() + "\n" + trabajador2.getData() +
+                "\n" + trabajador3.getData() + "\n" +
+                trabajador4.getData());
+        System.out.println(Empleados.getNextId());
 
     }
 }
@@ -24,7 +24,7 @@ class Empleados {
     private final String name;
     private String section;
     private final int id;
-    private static int nextId = 1;
+    private static int nextId = 1;  // Propiedad estática, es global y pertenece a la clase no a los objetos
 
 
     public Empleados(String name) {
@@ -43,5 +43,8 @@ class Empleados {
     public String getData() {
         return "El nombre es " + this.name + ", la sección es " + this.section + " y el id es " + this.id;
     }
-
+    /* Método estático de la clase, no de los objetos */
+    public static String getNextId() {
+        return "El próximo id de usuario es "  + Empleados.nextId;
+    }
 }

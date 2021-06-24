@@ -98,3 +98,28 @@ class Empleado {
         salary += salary * percent / 100;
     }
 }
+
+class Jefe extends Empleado {
+
+    private double incentive;
+
+
+    /* Se le tiene que pasar los argumentos del constructor a la subclase y al super */
+
+    public Jefe(String name, double salary, int year, int month, int day) {
+
+        super(name, salary, year, month, day);
+
+    }
+
+    public void setIncentive(double incentive) {
+        this.incentive = incentive;
+    }
+
+    /* Sobrescribiendo métodos heredados */
+    @Override
+    public double getSalary() {
+        double chiefSalary = super.getSalary();
+        return chiefSalary + this.incentive;
+    }
+}

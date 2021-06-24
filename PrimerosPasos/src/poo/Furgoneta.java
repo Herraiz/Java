@@ -16,4 +16,9 @@ public class Furgoneta extends Coche {
 
     }
 
+    public String getData() {
+        return "La capacidad de carga es " + this.loadingCapacity +
+                " y las plazas extras son " + this.extraSeats;
+    }
+
 }

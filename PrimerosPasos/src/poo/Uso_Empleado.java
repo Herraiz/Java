@@ -56,6 +56,15 @@ public class Uso_Empleado {
 
         misEmpleados[5] = new Jefe("Alba", 95000, 1999, 5, 26);
 
+        /* Casting de objetos --  Como el array es de empleados, no funcionan los métodos
+        * de subclase. Hacemos casting sobre una nueva variable objeto y lo hacemos tipo Jefe
+        * Antes funcionaba en el bucle for por que es el enhanced, pero de normal no funciona */
+        Jefe jefaFinanzas = (Jefe)misEmpleados[5];
+
+        jefaFinanzas.setIncentive(55000);
+        /* No se puede hacer casting de la super a la subclass */
+//        Jefe jefeCompras = (Jefe) misEmpleados[1];
+
         for (Empleado empleado : misEmpleados) {
             empleado.raiseSalary(5);
         }
@@ -130,5 +139,27 @@ class Jefe extends Empleado {
     public double getSalary() {
         double chiefSalary = super.getSalary();
         return chiefSalary + this.incentive;
+    }
+}
+
+    /* Uso del modificador "final" en clases y métodos */
+
+    /* Al ser Director una clase final, no se puede heredar de ella */
+
+final class Director extends Jefe {
+
+    private double incentive;
+
+    public Director(String name, double salary, int year, int month, int day) {
+
+        super(name, salary, year, month, day);
+
+    }
+    /* Al ser un método final no se puede sobreescribir en futuras subclases */
+    @Override
+    public final double getSalary() {
+        double chiefSalary = super.getSalary();
+        return chiefSalary + this.incentive;
+
     }
 }

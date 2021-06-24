@@ -35,8 +35,10 @@ public class Uso_Empleado {
 //                + "\nSueldo: " + empleado3.getSalary() + "\nFecha de alta: "
 //                + empleado3.getContractRegistration());
 
+        Jefe jefe_RRHH = new Jefe("Roberto", 55000, 2006, 9, 25);
+        jefe_RRHH.setIncentive(2570);
 
-        Empleado[] misEmpleados = new Empleado[4];
+        Empleado[] misEmpleados = new Empleado[6];
 
         misEmpleados[0] = new Empleado(
                 "Paco Gómez", 85000, 1990, 12, 17);
@@ -49,12 +51,19 @@ public class Uso_Empleado {
 
         misEmpleados[3] = new Empleado("Antonio Fernández");
 
+        /* Polimorfismo - Principio de sustición */
+        misEmpleados[4] = jefe_RRHH;    // El array espera un Empleado y acepta un Jefe
+
+        misEmpleados[5] = new Jefe("Alba", 95000, 1999, 5, 26);
+
         for (Empleado empleado : misEmpleados) {
             empleado.raiseSalary(5);
         }
 
         for (Empleado empleado : misEmpleados) {
             System.out.println("Nombre: " + empleado.getName()
+        /* Cuando hacemos el empleado.getSalary() de una subclase, se ejecuta el método sobreescrito de la subclase. Magia. */
+                    /* A esto se llama enlazado dinámico */
                     + " - Sueldo: " + empleado.getSalary() + " - Fecha de alta: "
                     + empleado.getContractRegistration());
         }
@@ -78,7 +87,7 @@ class Empleado {
 
     /* Sobrecargamos los constructores - diferentes estados iniciales */
     public Empleado(String name) {
-        this(name, 30000, 200, 1, 1);  // Llama al otro constructor
+        this(name, 30000, 2000, 1, 1);  // Llama al otro constructor
 
     }
 

@@ -1,5 +1,6 @@
 package poo;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -69,6 +70,8 @@ public class Uso_Empleado {
             empleado.raiseSalary(5);
         }
 
+         Arrays.sort(misEmpleados);
+
         for (Empleado empleado : misEmpleados) {
             System.out.println("Nombre: " + empleado.getName()
         /* Cuando hacemos el empleado.getSalary() de una subclase, se ejecuta el método sobreescrito de la subclase. Magia. */
@@ -79,7 +82,7 @@ public class Uso_Empleado {
 
     }
 }
-class Empleado {
+class Empleado implements Comparable {
 
     private final String name;
     private double salary;
@@ -114,6 +117,33 @@ class Empleado {
 
     public void raiseSalary(double percent) {
         salary += salary * percent / 100;
+    }
+
+    @Override
+    public int compareTo(Object miObjeto) {
+
+        /* Hacemos casting del Objeto a mi objeto tipo Empleado */
+        Empleado otroEmpleado = (Empleado) miObjeto;
+
+        /* Comparamos el salario del empleado "actual" con el de otro empleado
+        * Intuyo que se fija en una posición del array y compara con el resto
+        * con un bucle for enhanced */
+
+        /* Forma arcaica
+
+        if (this.salary < otroEmpleado.salary) {
+            return -1;
+        }
+
+        if (this.salary > otroEmpleado.salary) {
+            return 1;
+        }
+
+        return 0;
+
+        */
+
+        return Double.compare(this.salary, otroEmpleado.salary); // Double.compare() devuelve justo lo que necesita compareTo
     }
 }
 

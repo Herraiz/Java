@@ -36,7 +36,7 @@ public class Uso_Empleado {
 //                + "\nSueldo: " + empleado3.getSalary() + "\nFecha de alta: "
 //                + empleado3.getContractRegistration());
 
-        Jefe jefe_RRHH = new Jefe("Roberto", 55000, 2006, 9, 25);
+        Jefatura jefe_RRHH = new Jefatura("Roberto", 55000, 2006, 9, 25);
         jefe_RRHH.setIncentive(2570);
 
         Empleado[] misEmpleados = new Empleado[6];
@@ -55,22 +55,42 @@ public class Uso_Empleado {
         /* Polimorfismo - Principio de sustición */
         misEmpleados[4] = jefe_RRHH;    // El array espera un Empleado y acepta un Jefe
 
-        misEmpleados[5] = new Jefe("Alba", 95000, 1999, 5, 26);
+        misEmpleados[5] = new Jefatura("Alba", 95000, 1999, 5, 26);
 
         /* Casting de objetos --  Como el array es de empleados, no funcionan los métodos
         * de subclase. Hacemos casting sobre una nueva variable objeto y lo hacemos tipo Jefe
         * Antes funcionaba en el bucle for por que es el enhanced, pero de normal no funciona */
-        Jefe jefaFinanzas = (Jefe)misEmpleados[5];
+        Jefatura jefaFinanzas = (Jefatura)misEmpleados[5];
 
         jefaFinanzas.setIncentive(55000);
+
+        System.out.println(jefaFinanzas.takeDecisions("dar más días de vacaciones a los empleados"));
+
         /* No se puede hacer casting de la super a la subclass */
 //        Jefe jefeCompras = (Jefe) misEmpleados[1];
+
+        /*
+        Empleado director_comercial = new Jefe("Sandra", 85000, 2012, 5, 5);
+
+        // Como  Empleado implementa Comparable, podemos:
+        Comparable ejemplo = new Empleado("Elisabeth", 95000, 2011, 06, 07);
+
+        if (director_comercial instanceof Empleado) {
+            System.out.println("Es de tipo Jefatura");
+        }
+
+        if (ejemplo instanceof Comparable) {
+            System.out.println("Implementa la interfaz comparable");
+        }
+         */
+
+
 
         for (Empleado empleado : misEmpleados) {
             empleado.raiseSalary(5);
         }
 
-         Arrays.sort(misEmpleados);
+         Arrays.sort(misEmpleados); // Ordenamos por salary
 
         for (Empleado empleado : misEmpleados) {
             System.out.println("Nombre: " + empleado.getName()
@@ -147,17 +167,22 @@ class Empleado implements Comparable {
     }
 }
 
-class Jefe extends Empleado {
+class Jefatura extends Empleado implements Jefes {
 
     private double incentive;
 
 
     /* Se le tiene que pasar los argumentos del constructor a la subclase y al super */
 
-    public Jefe(String name, double salary, int year, int month, int day) {
+    public Jefatura(String name, double salary, int year, int month, int day) {
 
         super(name, salary, year, month, day);
 
+    }
+    /* Implementamos el método heredado de la interfaz Jefes */
+
+    public String takeDecisions(String decision) {
+        return "Un miembro de la dirección ha tomado la decisión de: " +  decision;
     }
 
     public void setIncentive(double incentive) {
@@ -176,7 +201,7 @@ class Jefe extends Empleado {
 
     /* Al ser Director una clase final, no se puede heredar de ella */
 
-final class Director extends Jefe {
+final class Director extends Jefatura {
 
     private double incentive;
 

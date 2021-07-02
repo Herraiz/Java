@@ -58,13 +58,16 @@ public class Uso_Empleado {
         misEmpleados[5] = new Jefatura("Alba", 95000, 1999, 5, 26);
 
         /* Casting de objetos --  Como el array es de empleados, no funcionan los métodos
-        * de subclase. Hacemos casting sobre una nueva variable objeto y lo hacemos tipo Jefe
-        * Antes funcionaba en el bucle for por que es el enhanced, pero de normal no funciona */
-        Jefatura jefaFinanzas = (Jefatura)misEmpleados[5];
+         * de subclase. Hacemos casting sobre una nueva variable objeto y lo hacemos tipo Jefe
+         * Antes funcionaba en el bucle for por que es el enhanced, pero de normal no funciona */
+        Jefatura jefaFinanzas = (Jefatura) misEmpleados[5];
 
         jefaFinanzas.setIncentive(55000);
 
         System.out.println(jefaFinanzas.takeDecisions("dar más días de vacaciones a los empleados"));
+
+        System.out.println("El jefe " + jefaFinanzas.getName() + " tiene un bonus de " + jefaFinanzas.setBonus(500));
+        System.out.println(misEmpleados[3].getName() + " tiene un bonus de " + misEmpleados[3].setBonus(200));
 
         /* No se puede hacer casting de la super a la subclass */
 //        Jefe jefeCompras = (Jefe) misEmpleados[1];
@@ -85,16 +88,15 @@ public class Uso_Empleado {
          */
 
 
-
         for (Empleado empleado : misEmpleados) {
             empleado.raiseSalary(5);
         }
 
-         Arrays.sort(misEmpleados); // Ordenamos por salary
+        Arrays.sort(misEmpleados); // Ordenamos por salary
 
         for (Empleado empleado : misEmpleados) {
             System.out.println("Nombre: " + empleado.getName()
-        /* Cuando hacemos el empleado.getSalary() de una subclase, se ejecuta el método sobreescrito de la subclase. Magia. */
+                    /* Cuando hacemos el empleado.getSalary() de una subclase, se ejecuta el método sobreescrito de la subclase. Magia. */
                     /* A esto se llama enlazado dinámico */
                     + " - Sueldo: " + empleado.getSalary() + " - Fecha de alta: "
                     + empleado.getContractRegistration());
@@ -102,11 +104,12 @@ public class Uso_Empleado {
 
     }
 }
-class Empleado implements Comparable {
+
+class Empleado implements Comparable, Trabajadores {
 
     private final String name;
-    private double salary;
     private final Date contractRegistration;
+    private double salary;
 
     /* Constructor */
     public Empleado(String name, double salary, int year, int month, int day) {
@@ -146,8 +149,8 @@ class Empleado implements Comparable {
         Empleado otroEmpleado = (Empleado) miObjeto;
 
         /* Comparamos el salario del empleado "actual" con el de otro empleado
-        * Intuyo que se fija en una posición del array y compara con el resto
-        * con un bucle for enhanced */
+         * Intuyo que se fija en una posición del array y compara con el resto
+         * con un bucle for enhanced */
 
         /* Forma arcaica
 
@@ -165,6 +168,11 @@ class Empleado implements Comparable {
 
         return Double.compare(this.salary, otroEmpleado.salary); // Double.compare() devuelve justo lo que necesita compareTo
     }
+
+    @Override
+    public double setBonus(double gratification) {
+        return Trabajadores.baseBonus + gratification;
+    }
 }
 
 class Jefatura extends Empleado implements Jefes {
@@ -181,8 +189,18 @@ class Jefatura extends Empleado implements Jefes {
     }
     /* Implementamos el método heredado de la interfaz Jefes */
 
+    @Override
     public String takeDecisions(String decision) {
-        return "Un miembro de la dirección ha tomado la decisión de: " +  decision;
+        return "Un miembro de la dirección ha tomado la decisión de: " + decision;
+    }
+
+    @Override
+    public double setBonus(double gratification) {
+
+        double bonus = 2000;
+
+        return Trabajadores.baseBonus + gratification + bonus;
+
     }
 
     public void setIncentive(double incentive) {
@@ -197,9 +215,9 @@ class Jefatura extends Empleado implements Jefes {
     }
 }
 
-    /* Uso del modificador "final" en clases y métodos */
+/* Uso del modificador "final" en clases y métodos */
 
-    /* Al ser Director una clase final, no se puede heredar de ella */
+/* Al ser Director una clase final, no se puede heredar de ella */
 
 final class Director extends Jefatura {
 
@@ -210,6 +228,7 @@ final class Director extends Jefatura {
         super(name, salary, year, month, day);
 
     }
+
     /* Al ser un método final no se puede sobreescribir en futuras subclases */
     @Override
     public final double getSalary() {

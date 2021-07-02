@@ -16,9 +16,21 @@ public class CreandoMarcos {
 
 class MiMarco extends JFrame {
 
-    public MiMarco(){
+    public MiMarco() {
 
+        /* Tamaño y localización
         setSize(500, 300);
+        setLocation(getWidth(), getHeight());
+        */
+
+        setBounds(500, 300, 250, 250);
+
+        /* Resize y extendido por defecto
+        setResizable(false);
+        setExtendedState(Frame.MAXIMIZED_BOTH);
+         */
+
+        setTitle("Mi ventana");
 
     }
 

@@ -33,21 +33,35 @@ class MarcoConImagenes extends JFrame {
 
 class PanelConImagenes extends JPanel {
 
-    private Image logo;
-    private Image gif;
+    private Image image;
+
+    public PanelConImagenes() {
+        /* Cargamos la imagen al usar el constructor */
+        try {
+            image = ImageIO.read(new File("src/gui/explosion.gif"));
+        } catch (IOException e) {
+            System.out.println("La imagen no se encuentra, error: " + e);
+        }
+
+    }
 
     public void paintComponent(Graphics g) {
 
         super.paintComponent(g);
 
-        try {
-            logo = ImageIO.read(new File("src/gui/iceon.jpg"));
-        }
-        catch(IOException e) {
-            System.out.println("La imagen no se encuentra, error: " + e);
-        }
+        int width = image.getWidth(this);
+        int heigth = image.getHeight(this);
+        g.drawImage(image, 0, 0, null);
 
-        g.drawImage(logo, 5, 5, null);
+
+        for (int dx = 0; dx < 2000; dx += width) {
+            for (int dy = 0; dy < 2000; dy+= heigth){
+
+                if (dx + dy > 0) {
+                g.copyArea(0, 0, width, heigth, dx, dy);
+                }
+            }
+        }
 
     }
 

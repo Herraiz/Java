@@ -9,7 +9,7 @@ public class TrabajandoColores {
 
     public static void main(String[] args) {
 
-        MarcoConFuentes mainFrame = new MarcoConFuentes();
+        MarcoConImagenes mainFrame = new MarcoConImagenes();
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
 
@@ -23,7 +23,7 @@ class MarcoConColor extends JFrame {
         setTitle("Prueba con colores");
         setSize(400, 400);
 
-        PanelConFuentes myPanel = new PanelConFuentes();
+        PanelConImagenes myPanel = new PanelConImagenes();
         add(myPanel);
         myPanel.setBackground(SystemColor.window);
 

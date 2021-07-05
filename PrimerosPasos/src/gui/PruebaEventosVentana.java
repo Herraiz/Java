@@ -1,8 +1,8 @@
 package gui;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 public class PruebaEventosVentana {
 
@@ -27,14 +27,18 @@ class MarcoVentana extends JFrame {
     public MarcoVentana() {
 
         setVisible(true);
+
+        /* Simplificamos
         MVentana window_listener = new MVentana();
         addWindowListener(window_listener);  // Ponemos a MVentana en escucha
+        */
 
+        addWindowListener(new MVentana());
     }
 }
 
-class MVentana implements WindowListener {
-
+class MVentana extends WindowAdapter {
+/* Simplificamos gracias a la clase adaptadora
     @Override
     public void windowOpened(WindowEvent e) {
         System.out.println("Ventana abierta");
@@ -48,13 +52,13 @@ class MVentana implements WindowListener {
     @Override
     public void windowClosed(WindowEvent e) {
         System.out.println("Ventana cerrada");
-    }
+    } */
 
     @Override
     public void windowIconified(WindowEvent e) {
         System.out.println("Ventana minimizada");
     }
-
+/* Simplificamos gracias a la clase adaptadora
     @Override
     public void windowDeiconified(WindowEvent e) {
         System.out.println("Ventana restaurada");
@@ -69,5 +73,5 @@ class MVentana implements WindowListener {
     public void windowDeactivated(WindowEvent e) {
         System.out.println("Ventana desactivada");
     }
-
+*/
 }

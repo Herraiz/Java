@@ -30,7 +30,7 @@ class MarcoBotones extends JFrame {
 
 }
 
-class PanelBotones extends JPanel implements ActionListener {
+class PanelBotones extends JPanel{
 
     JButton blueButton = new JButton("Azul");
     JButton yellowButton = new JButton("Amarillo");
@@ -42,25 +42,26 @@ class PanelBotones extends JPanel implements ActionListener {
         add(redButton);
 
         /* 3 Fuentes - 1 oyente */
-        blueButton.addActionListener(this);  // al hacer click, el panel recibe el el evento
-        yellowButton.addActionListener(this);
-        redButton.addActionListener(this);
+        blueButton.addActionListener(new BackgroundColor(Color.BLUE));  // al hacer click, el panel recibe el el evento
+        yellowButton.addActionListener(new BackgroundColor(Color.YELLOW));
+        redButton.addActionListener(new BackgroundColor(Color.RED));
 
         /* qué evento se realiza? El que implementa la interfaz ActionListener */
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    /* Clase interna !!!*/
+    private class BackgroundColor implements ActionListener {
+        private final Color backgroundColor;
 
-        Object pushedButton = e.getSource();
-
-        if (pushedButton == blueButton) {
-            setBackground(Color.BLUE);
-        } else if (pushedButton == yellowButton) {
-            setBackground(Color.YELLOW);
-        } else if (pushedButton == redButton) {
-            setBackground(Color.RED);
+        public BackgroundColor(Color c){
+            backgroundColor = c;
         }
 
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            setBackground(backgroundColor);
+        }
     }
+
 }

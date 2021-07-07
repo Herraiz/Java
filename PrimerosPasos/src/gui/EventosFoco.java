@@ -68,7 +68,21 @@ class PanelFoco extends JPanel {
 
         @Override
         public void focusLost(FocusEvent e) {
-            System.out.println("Foco perdido");
+            String email = frame2.getText();
+            boolean check = false;
+
+            for (int i = 0; i < email.length(); i++) {
+                if (email.charAt(i) == '@') {
+                    check = true;
+                    break;
+                }
+            }
+
+            if (check) {
+                System.out.println("Email correcto");
+            } else {
+                System.out.println("Email incorrecto");
+            }
         }
     }
 

@@ -1,4 +1,4 @@
-package com.herraiz;
+package lenguaje;
 
 public class Calculos_Math {
 

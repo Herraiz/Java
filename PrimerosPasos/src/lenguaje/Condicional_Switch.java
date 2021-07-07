@@ -1,4 +1,4 @@
-package com.herraiz;
+package lenguaje;
 
 import javax.swing.*;
 import java.util.Scanner;

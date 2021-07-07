@@ -1,4 +1,4 @@
-package com.herraiz;
+package lenguaje;
 
 public class Declaraciones_Operadores {
 

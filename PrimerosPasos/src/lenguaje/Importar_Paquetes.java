@@ -1,4 +1,4 @@
-package com.herraiz;
+package lenguaje;
 
 import java.util.Locale;
 import java.util.Scanner;

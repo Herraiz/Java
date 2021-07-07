@@ -1,4 +1,4 @@
-package com.herraiz;
+package lenguaje;
 
 public class Array_Bidimensional_Calculado {
 

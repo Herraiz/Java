@@ -52,6 +52,28 @@ class PanelAccion extends JPanel {
         add(new JButton(blueAction));
         add(new JButton(redAction));
 
+        /* 1) Creamos el mapa de entrada - Para poder recoger las teclas */
+        InputMap inputMap = getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+
+        /* 2) Creamos la tecla que queremos recoger */
+        KeyStroke yellowKey = KeyStroke.getKeyStroke("ctrl A");
+
+        /* 3) Asignamos la tecla al objeto "intermedio" */
+        inputMap.put(yellowKey, "yellowBackground");
+
+        /* 4) Usamos un ActionMap para enlazar la acción con nuestro objeto intermedio, asociado a la tecla */
+        ActionMap actionMap = getActionMap();
+        actionMap.put("yellowBackground", yellowAction);
+
+        /*  Para el resto de colores: */
+
+        KeyStroke blueKey = KeyStroke.getKeyStroke("ctrl B");
+        inputMap.put(blueKey, "blueBackground");
+        actionMap.put("blueBackground", blueAction);
+
+        KeyStroke redKey = KeyStroke.getKeyStroke("ctrl R");
+        inputMap.put(redKey, "redBackground");
+        actionMap.put("redBackground", redAction);
     }
 
     private class AccionColor extends AbstractAction {
@@ -76,5 +98,3 @@ class PanelAccion extends JPanel {
         }
     }
 }
-
-

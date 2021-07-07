@@ -35,49 +35,46 @@ class PanelAccion extends JPanel {
 
         AccionColor yellowAction = new AccionColor(
                 "Amarillo",
-                new ImageIcon("src/gui/yellow.jpg"),
+                new ImageIcon("src/gui/yellow.png"),
                 Color.YELLOW);
 
         AccionColor blueAction = new AccionColor(
                 "Azul",
-                new ImageIcon("src/gui/blue.jpg"),
+                new ImageIcon("src/gui/blue.png"),
                 Color.BLUE);
 
         AccionColor redAction = new AccionColor(
                 "Rojo",
-                new ImageIcon("src/gui/red.jpg"),
+                new ImageIcon("src/gui/red.png"),
                 Color.RED);
 
+        add(new JButton(yellowAction));
+        add(new JButton(blueAction));
+        add(new JButton(redAction));
 
-        /* Forma antigua de crear los botones
+    }
 
-        JButton yellowButton = new JButton("Amarillo");
-        JButton blueButton = new JButton("Azul");
-        JButton redButton = new JButton("Rojo");
+    private class AccionColor extends AbstractAction {
 
-        add(yellowButton);
-        add(blueButton);
-        add(redButton);
-        */
+        /* Hereda de la clase adaptadora, usamos inner class para que tenga JPanel y pueda hacer setBackground */
+
+        public AccionColor(String name, Icon icon, Color buttonColor) {
+
+            putValue(Action.NAME, name);
+            putValue(Action.SMALL_ICON, icon);
+            putValue(Action.SHORT_DESCRIPTION, "Poner la lámina de color " + name);
+            putValue("backgroundColor", buttonColor);
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            Color c = (Color) getValue("backgroundColor");
+            setBackground(c);
+
+            System.out.println("Nombre: " + getValue(Action.NAME) + " - Descripción: " + getValue(Action.SHORT_DESCRIPTION));
+        }
     }
 }
 
-class AccionColor extends AbstractAction { // Clase adaptadora
 
-    public AccionColor(String name, Icon icon, Color buttonColor) {
-
-        putValue(Action.NAME, name);
-        putValue(Action.SMALL_ICON, icon);
-        putValue(Action.SHORT_DESCRIPTION, "Poner la lámina de color " + name);
-        putValue("backgroundColor", buttonColor);
-
-
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
-
-
-}

@@ -3,28 +3,28 @@ package gui;
 import javax.swing.*;
 import java.awt.*;
 
-public class FlowLayout {
+public class Layout_FlowLayout {
 
     public static void main(String[] args) {
 
-        MarcoLayout frame = new MarcoLayout();
+        MarcoFlowLayout frame = new MarcoFlowLayout();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
 }
 
-class MarcoLayout extends JFrame {
+class MarcoFlowLayout extends JFrame {
 
-    public MarcoLayout(){
+    public MarcoFlowLayout(){
         setTitle("Prueba layouts");
         setBounds(600, 350, 600, 300);
-        PanelLayout panel = new PanelLayout();
+        PanelFlowLayout panel = new PanelFlowLayout();
         add(panel);
     }
 }
 
-class PanelLayout extends JPanel {
-    public PanelLayout(){
+class PanelFlowLayout extends JPanel {
+    public PanelFlowLayout(){
 
         /* Creamos el layout y asignamos alineación por defecto - se lo ponemos a Panel aunque se le puede poner al marco también */
 

@@ -3,7 +3,7 @@ package gui;
 import javax.swing.*;
 import java.awt.*;
 
-public class Layouts_1 {
+public class FlowLayout {
 
     public static void main(String[] args) {
 
@@ -19,17 +19,17 @@ class MarcoLayout extends JFrame {
         setTitle("Prueba layouts");
         setBounds(600, 350, 600, 300);
         PanelLayout panel = new PanelLayout();
-
-        FlowLayout myLayout = new FlowLayout();
-        myLayout.setAlignment(FlowLayout.LEADING);
-        setLayout(myLayout);
-
         add(panel);
     }
 }
 
 class PanelLayout extends JPanel {
     public PanelLayout(){
+
+        /* Creamos el layout y asignamos alineación por defecto - se lo ponemos a Panel aunque se le puede poner al marco también */
+
+        setLayout(new FlowLayout(FlowLayout.CENTER, 20, 100)); // con los gaps podemos controlar dónde se ponen los botones
+
         add(new JButton("Amarillo"));
         add(new JButton("Rojo"));
         add(new JButton("Azul"));

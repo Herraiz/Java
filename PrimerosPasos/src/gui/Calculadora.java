@@ -2,6 +2,8 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Calculadora {
 
@@ -19,16 +21,21 @@ class MarcoCalculadora extends JFrame {
         setBounds(500, 300, 450, 300);
         PanelCalculadora calculatorPanel = new PanelCalculadora();
         add(calculatorPanel);
+        // pack(); // hace que el contenedor se adapte al tamaño de los componentes
     }
 }
 
 class PanelCalculadora extends JPanel {
 
     private final JPanel buttons;
+    private final JButton screen;
+    private boolean starter;
 
     public PanelCalculadora(){
+        starter = true;
+
         setLayout(new BorderLayout());
-        JButton screen = new JButton("0");
+        screen = new JButton("0");
         screen.setEnabled(false);
         add(screen, BorderLayout.NORTH);
 
@@ -36,33 +43,52 @@ class PanelCalculadora extends JPanel {
         buttons = new JPanel();
         buttons.setLayout(new GridLayout(4, 4));
 
-        createButton("7");
-        createButton("8");
-        createButton("9");
-        createButton("/");
+        ActionListener insert = new InsertNumber();
 
-        createButton("4");
-        createButton("5");
-        createButton("6");
-        createButton("*");
+        createButton("7", insert);
+        createButton("8", insert);
+        createButton("9", insert);
+//        createButton("/", insert);
 
-        createButton("1");
-        createButton("2");
-        createButton("3");
-        createButton("-");
+        createButton("4", insert);
+        createButton("5", insert);
+        createButton("6", insert);
+//        createButton("*", insert);
 
-        createButton("0");
-        createButton(".");
-        createButton("=");
-        createButton("+");
+        createButton("1", insert);
+        createButton("2", insert);
+        createButton("3", insert);
+//        createButton("-", insert);
+
+        createButton("0", insert);
+        createButton(".", insert);
+//        createButton("=", insert);
+//        createButton("+", insert);
 
 
         add(buttons, BorderLayout.CENTER);
     }
 
-        private void createButton(String text) {
+        private void createButton(String text, ActionListener listener) {
             JButton button = new JButton(text);
+            button.addActionListener(listener);
             buttons.add(button);
+
+        }
+
+        private class InsertNumber implements ActionListener {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String input = e.getActionCommand();
+
+                if (starter) {  // borrará el 0 cuando empecemos a calcular
+                    screen.setText("");
+                    starter = false;
+                }
+
+                screen.setText(screen.getText() + input);
+            }
         }
 
 

@@ -30,6 +30,8 @@ class PanelCalculadora extends JPanel {
     private final JPanel buttons;
     private final JButton screen;
     private boolean starter;
+    private double result;
+    String lastOperation;
 
     public PanelCalculadora(){
         starter = true;
@@ -44,29 +46,33 @@ class PanelCalculadora extends JPanel {
         buttons.setLayout(new GridLayout(4, 4));
 
         ActionListener insert = new InsertNumber();
+        ActionListener insertOrder = new ActionOrder();
 
         createButton("7", insert);
         createButton("8", insert);
         createButton("9", insert);
-//        createButton("/", insert);
+        createButton("/", insertOrder);
 
         createButton("4", insert);
         createButton("5", insert);
         createButton("6", insert);
-//        createButton("*", insert);
+        createButton("*", insertOrder);
 
         createButton("1", insert);
         createButton("2", insert);
         createButton("3", insert);
-//        createButton("-", insert);
+        createButton("-", insertOrder);
 
         createButton("0", insert);
         createButton(".", insert);
-//        createButton("=", insert);
-//        createButton("+", insert);
+        createButton("+", insertOrder);
+        createButton("=", insertOrder);
+
 
 
         add(buttons, BorderLayout.CENTER);
+
+        lastOperation = "=";
     }
 
         private void createButton(String text, ActionListener listener) {
@@ -89,6 +95,42 @@ class PanelCalculadora extends JPanel {
 
                 screen.setText(screen.getText() + input);
             }
+        }
+
+        private class ActionOrder implements ActionListener {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String operation = e.getActionCommand();
+                System.out.println(operation);
+                calculate(Double.parseDouble(screen.getText()));
+                lastOperation = operation;
+                starter = true;
+            }
+
+            public void calculate(Double x) {
+
+                if (lastOperation.equals("+")) {
+                    result += x;
+                    System.out.println(result);
+
+                } else if (lastOperation.equals("-")) {
+                    result -= x;
+
+                } else if (lastOperation.equals("*")) {
+                    result *= x;
+
+                } else if (lastOperation.equals("/")) {
+                    result /= x;
+
+                } else if (lastOperation.equals("=")) {
+                    result = x;
+                }
+
+                screen.setText("" + result);
+
+            }
+
         }
 
 

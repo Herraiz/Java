@@ -2,7 +2,6 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PruebaRadio2 {
@@ -52,12 +51,8 @@ class PanelRadio2 extends JPanel {
         JRadioButton button = new JRadioButton(name, selected);
         myGroup.add(button);
         panelButtons.add(button);
-        ActionListener myEvent = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                text.setFont(new Font("Serif", Font.PLAIN, size));
-            }
-        };
+        /* Lambda */
+        ActionListener myEvent = e -> text.setFont(new Font("Serif", Font.PLAIN, size));
         button.addActionListener(myEvent);
     }
 }

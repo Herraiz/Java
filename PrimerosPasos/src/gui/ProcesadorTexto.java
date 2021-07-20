@@ -28,6 +28,9 @@ class MarcoProcesador extends JFrame {
 class PanelProcesador extends JPanel {
 
     JTextPane textPanel;
+
+    JMenu font, style, size;
+
     String lastFont = "Arial";
     int lastStyle = Font.PLAIN;
     int lastSize = 12;
@@ -40,49 +43,26 @@ class PanelProcesador extends JPanel {
         JMenuBar menuBar = new JMenuBar();
 
         /* Font submenu **/
-        JMenu font = new JMenu("Fuente");
-        JMenuItem arial = new JMenuItem("Arial");
-        arial.addActionListener(changeFont("Arial"));
-        JMenuItem courier = new JMenuItem("Courier");
-        courier.addActionListener(changeFont("Courier"));
-        JMenuItem verdana = new JMenuItem("Verdana");
-        verdana.addActionListener(changeFont("Verdana"));
+        font = new JMenu("Fuente");
+        menuConfig("Arial", "Fuente", "", 1, 1);
+        menuConfig("Courier", "Fuente", "", 1, 1);
+        menuConfig("Verdana", "Fuente", "", 1, 1);
 
-        menuBar.add(font);
-        font.add(arial);
-        font.add(courier);
-        font.add(verdana);
 
         /* Style submenu **/
-        JMenu style = new JMenu("Estilo");
-        JMenuItem plain = new JMenuItem("Normal");
-        plain.addActionListener(changeStyle(Font.PLAIN));
-        JMenuItem bold = new JMenuItem("Negrita");
-        bold.addActionListener(changeStyle(Font.BOLD));
-        JMenuItem italic = new JMenuItem("Cursiva");
-        italic.addActionListener(changeStyle(Font.ITALIC));
+        style = new JMenu("Estilo");
+        menuConfig("Normal", "Estilo", "", 1, 1);
+        menuConfig("Negrita", "Estilo", "", 1, 1);
+        menuConfig("Cursiva", "Estilo", "", 1, 1);
 
-        menuBar.add(style);
-        style.add(plain);
-        style.add(bold);
-        style.add(italic);
 
         /* Size submenu **/
-        JMenu size = new JMenu("Tamaño");
-        JMenuItem size12 = new JMenuItem("12");
-        size12.addActionListener(changeSize(12));
-        JMenuItem size16 = new JMenuItem("16");
-        size16.addActionListener(changeSize(16));
-        JMenuItem size20 = new JMenuItem("20");
-        size20.addActionListener(changeSize(20));
-        JMenuItem size24 = new JMenuItem("24");
-        size24.addActionListener(changeSize(24));
+        size = new JMenu("Tamaño");
+        menuConfig("12", "Tamaño", "", 1, 1);
+        menuConfig("16", "Tamaño", "", 1, 1);
+        menuConfig("20", "Tamaño", "", 1, 1);
+        menuConfig("24", "Tamaño", "", 1, 1);
 
-        menuBar.add(size);
-        size.add(size12);
-        size.add(size16);
-        size.add(size20);
-        size.add(size24);
 
 
         /* Text Panel */
@@ -92,10 +72,24 @@ class PanelProcesador extends JPanel {
 
         /* Adding all to the interface */
 
+        menuBar.add(font);
+        menuBar.add(style);
+        menuBar.add(size);
+
         menuPanel.add(menuBar);
 
         add(menuPanel, BorderLayout.NORTH);
         add(textPanel, BorderLayout.CENTER);
+    }
+
+    public void menuConfig(String title, String menu, String font, int style, int size) {
+        JMenuItem menuItem = new JMenuItem(title);
+        switch (menu) {
+            case "Fuente" -> this.font.add(menuItem);
+            case "Estilo" -> this.style.add(menuItem);
+            case "Tamaño" -> this.size.add(menuItem);
+        }
+
     }
 
     private ActionListener changeFont(String font) {

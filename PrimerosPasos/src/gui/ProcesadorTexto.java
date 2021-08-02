@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class ProcesadorTexto {
 
@@ -48,7 +49,7 @@ class PanelProcesador extends JPanel {
 
         /* Style submenu **/
         style = new JMenu("Estilo");
-        menuConfig("Normal", "Estilo", "", 9, 1);
+        menuConfig("Normal", "Estilo", "", Font.PLAIN, 1);
         menuConfig("Negrita", "Estilo", "", Font.BOLD, 1);
         menuConfig("Cursiva", "Estilo", "", Font.ITALIC, 1);
 
@@ -93,11 +94,11 @@ class PanelProcesador extends JPanel {
 
     private class GestionaEventos implements ActionListener {
 
-        String textType, menu;
+        String fontName, menu;
         int fontStyle, fontSize;
 
         GestionaEventos(String element, String buttonFont, int buttonStyle, int buttonSize) {
-            textType = buttonFont;
+            fontName = buttonFont;
             fontStyle = buttonStyle;
             fontSize = buttonSize;
             menu = element;
@@ -106,10 +107,23 @@ class PanelProcesador extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            
+            Font actualFont = textPanel.getFont();
 
-            textPanel.setFont(new Font(textType, fontStyle, fontSize));
+            if (Objects.equals(menu, "Arial") || Objects.equals(menu, "Verdana") || Objects.equals(menu, "Courier")) {
+                fontStyle = actualFont.getStyle();
+                fontSize = actualFont.getSize();
+            } else if (Objects.equals(menu, "Normal") || Objects.equals(menu, "Negrita") || Objects.equals(menu, "Cursiva")) {
+                fontName = actualFont.getFontName();
+                fontSize = actualFont.getSize();
 
+            } else if (Objects.equals(menu, "12") || Objects.equals(menu, "16") ||
+                       Objects.equals(menu, "20") || Objects.equals(menu, "24")) {
+                fontName = actualFont.getFontName();
+                fontStyle = actualFont.getStyle();
+            }
+
+            textPanel.setFont(new Font(fontName, fontStyle, fontSize));
+            System.out.println("Tipo: " + fontName + " Estilo: " + fontStyle + " Tamaño: " + fontSize);
         }
     }
 

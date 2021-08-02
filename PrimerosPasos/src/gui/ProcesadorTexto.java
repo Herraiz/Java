@@ -1,9 +1,8 @@
 package gui;
 
 import javax.swing.*;
+import javax.swing.text.StyledEditorKit;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Objects;
 
 public class ProcesadorTexto {
@@ -49,7 +48,6 @@ class PanelProcesador extends JPanel {
 
         /* Style submenu **/
         style = new JMenu("Estilo");
-        menuConfig("Normal", "Estilo", "", Font.PLAIN, 1);
         menuConfig("Negrita", "Estilo", "", Font.BOLD, 1);
         menuConfig("Cursiva", "Estilo", "", Font.ITALIC, 1);
 
@@ -83,48 +81,29 @@ class PanelProcesador extends JPanel {
     public void menuConfig(String title, String menu, String font, int style, int size) {
         JMenuItem menuItem = new JMenuItem(title);
         switch (menu) {
-            case "Fuente" -> this.font.add(menuItem);
-            case "Estilo" -> this.style.add(menuItem);
-            case "Tamaño" -> this.size.add(menuItem);
-        }
+            case "Fuente" -> {
+                this.font.add(menuItem);
 
-        menuItem.addActionListener(new GestionaEventos(title, font, style, size));
-
-    }
-
-    private class GestionaEventos implements ActionListener {
-
-        String fontName, menu;
-        int fontStyle, fontSize;
-
-        GestionaEventos(String element, String buttonFont, int buttonStyle, int buttonSize) {
-            fontName = buttonFont;
-            fontStyle = buttonStyle;
-            fontSize = buttonSize;
-            menu = element;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-            Font actualFont = textPanel.getFont();
-
-            if (Objects.equals(menu, "Arial") || Objects.equals(menu, "Verdana") || Objects.equals(menu, "Courier")) {
-                fontStyle = actualFont.getStyle();
-                fontSize = actualFont.getSize();
-            } else if (Objects.equals(menu, "Normal") || Objects.equals(menu, "Negrita") || Objects.equals(menu, "Cursiva")) {
-                fontName = actualFont.getFamily();
-                fontSize = actualFont.getSize();
-
-            } else if (Objects.equals(menu, "12") || Objects.equals(menu, "16") ||
-                       Objects.equals(menu, "20") || Objects.equals(menu, "24")) {
-                fontName = actualFont.getFamily();
-                fontStyle = actualFont.getStyle();
+                if (Objects.equals(font, "Arial")) {
+                    menuItem.addActionListener(new StyledEditorKit.FontFamilyAction("Change size", "Arial"));
+                } else if (Objects.equals(font, "Verdana")) {
+                    menuItem.addActionListener(new StyledEditorKit.FontFamilyAction("Change size", "Verdana"));
+                } else if (Objects.equals(font, "Courier")) {
+                    menuItem.addActionListener(new StyledEditorKit.FontFamilyAction("Change size", "Courier"));
+                }
             }
-
-            textPanel.setFont(new Font(fontName, fontStyle, fontSize));
-            System.out.println("Tipo: " + fontName + " Estilo: " + fontStyle + " Tamaño: " + fontSize);
+            case "Estilo" -> {
+                this.style.add(menuItem);
+                if (style == Font.BOLD) {
+                    menuItem.addActionListener(new StyledEditorKit.BoldAction());
+                } else if ((style == Font.ITALIC)) {
+                    menuItem.addActionListener(new StyledEditorKit.ItalicAction());
+                }
+            }
+            case "Tamaño" -> {
+                this.size.add(menuItem);
+                menuItem.addActionListener(new StyledEditorKit.FontSizeAction("Change size", size));
+            }
         }
     }
-
 }

@@ -113,12 +113,12 @@ class PanelProcesador extends JPanel {
                 fontStyle = actualFont.getStyle();
                 fontSize = actualFont.getSize();
             } else if (Objects.equals(menu, "Normal") || Objects.equals(menu, "Negrita") || Objects.equals(menu, "Cursiva")) {
-                fontName = actualFont.getFontName();
+                fontName = actualFont.getFamily();
                 fontSize = actualFont.getSize();
 
             } else if (Objects.equals(menu, "12") || Objects.equals(menu, "16") ||
                        Objects.equals(menu, "20") || Objects.equals(menu, "24")) {
-                fontName = actualFont.getFontName();
+                fontName = actualFont.getFamily();
                 fontStyle = actualFont.getStyle();
             }
 

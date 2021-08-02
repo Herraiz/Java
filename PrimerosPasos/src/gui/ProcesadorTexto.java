@@ -41,23 +41,23 @@ class PanelProcesador extends JPanel {
 
         /* Font submenu **/
         font = new JMenu("Fuente");
-        menuConfig("Arial", "Fuente", "Arial", 9, 10);
-        menuConfig("Courier", "Fuente", "Courier", 9, 10);
-        menuConfig("Verdana", "Fuente", "Verdana", 9, 10);
+        menuConfig("Arial", "Fuente", "Arial", 9, 10, "");
+        menuConfig("Courier", "Fuente", "Courier", 9, 10, "");
+        menuConfig("Verdana", "Fuente", "Verdana", 9, 10, "");
 
 
         /* Style submenu **/
         style = new JMenu("Estilo");
-        menuConfig("Negrita", "Estilo", "", Font.BOLD, 1);
-        menuConfig("Cursiva", "Estilo", "", Font.ITALIC, 1);
+        menuConfig("Negrita", "Estilo", "", Font.BOLD, 1, "./src/gui/bold.png");
+        menuConfig("Cursiva", "Estilo", "", Font.ITALIC, 1, "./src/gui/italic.png");
 
 
         /* Size submenu **/
         size = new JMenu("Tamaño");
-        menuConfig("12", "Tamaño", "", 9, 12);
-        menuConfig("16", "Tamaño", "", 9, 16);
-        menuConfig("20", "Tamaño", "", 9, 20);
-        menuConfig("24", "Tamaño", "", 9, 24);
+        menuConfig("12", "Tamaño", "", 9, 12, "");
+        menuConfig("16", "Tamaño", "", 9, 16, "");
+        menuConfig("20", "Tamaño", "", 9, 20, "");
+        menuConfig("24", "Tamaño", "", 9, 24, "");
 
 
 
@@ -78,8 +78,8 @@ class PanelProcesador extends JPanel {
         add(textPanel, BorderLayout.CENTER);
     }
 
-    public void menuConfig(String title, String menu, String font, int style, int size) {
-        JMenuItem menuItem = new JMenuItem(title);
+    public void menuConfig(String title, String menu, String font, int style, int size, String icon) {
+        JMenuItem menuItem = new JMenuItem(title, new ImageIcon(icon));
         switch (menu) {
             case "Fuente" -> {
                 this.font.add(menuItem);

@@ -31,9 +31,6 @@ class PanelProcesador extends JPanel {
 
     JMenu font, style, size;
 
-    String lastFont = "Arial";
-    int lastStyle = Font.PLAIN;
-    int lastSize = 12;
 
     public PanelProcesador() {
         setLayout(new BorderLayout());
@@ -44,24 +41,24 @@ class PanelProcesador extends JPanel {
 
         /* Font submenu **/
         font = new JMenu("Fuente");
-        menuConfig("Arial", "Fuente", "", 1, 1);
-        menuConfig("Courier", "Fuente", "", 1, 1);
-        menuConfig("Verdana", "Fuente", "", 1, 1);
+        menuConfig("Arial", "Fuente", "Arial", 9, 10);
+        menuConfig("Courier", "Fuente", "Courier", 9, 10);
+        menuConfig("Verdana", "Fuente", "Verdana", 9, 10);
 
 
         /* Style submenu **/
         style = new JMenu("Estilo");
-        menuConfig("Normal", "Estilo", "", 1, 1);
-        menuConfig("Negrita", "Estilo", "", 1, 1);
-        menuConfig("Cursiva", "Estilo", "", 1, 1);
+        menuConfig("Normal", "Estilo", "", 9, 1);
+        menuConfig("Negrita", "Estilo", "", Font.BOLD, 1);
+        menuConfig("Cursiva", "Estilo", "", Font.ITALIC, 1);
 
 
         /* Size submenu **/
         size = new JMenu("Tamaño");
-        menuConfig("12", "Tamaño", "", 1, 1);
-        menuConfig("16", "Tamaño", "", 1, 1);
-        menuConfig("20", "Tamaño", "", 1, 1);
-        menuConfig("24", "Tamaño", "", 1, 1);
+        menuConfig("12", "Tamaño", "", 9, 12);
+        menuConfig("16", "Tamaño", "", 9, 16);
+        menuConfig("20", "Tamaño", "", 9, 20);
+        menuConfig("24", "Tamaño", "", 9, 24);
 
 
 
@@ -90,36 +87,30 @@ class PanelProcesador extends JPanel {
             case "Tamaño" -> this.size.add(menuItem);
         }
 
+        menuItem.addActionListener(new GestionaEventos(title, font, style, size));
+
     }
 
-    private ActionListener changeFont(String font) {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                textPanel.setFont(new Font(font, lastStyle, lastSize));
-                lastFont = font;
-            }
-        };
-    }
+    private class GestionaEventos implements ActionListener {
 
-    private ActionListener changeStyle(int style) {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                textPanel.setFont(new Font(lastFont, style, lastSize));
-                lastStyle = style;
-            }
-        };
-    }
+        String textType, menu;
+        int fontStyle, fontSize;
 
-    private ActionListener changeSize(int size) {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                textPanel.setFont(new Font(lastFont, lastStyle, size));
-                lastSize = size;
-            }
-        };
+        GestionaEventos(String element, String buttonFont, int buttonStyle, int buttonSize) {
+            textType = buttonFont;
+            fontStyle = buttonStyle;
+            fontSize = buttonSize;
+            menu = element;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            
+
+            textPanel.setFont(new Font(textType, fontStyle, fontSize));
+
+        }
     }
 
 }

@@ -3,6 +3,7 @@ package gui;
 import javax.swing.*;
 import javax.swing.text.StyledEditorKit;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.Objects;
 
 public class ProcesadorTexto {
@@ -82,6 +83,8 @@ class PanelProcesador extends JPanel {
         size20.addActionListener(new StyledEditorKit.FontSizeAction("Change size", 20));
         size24.addActionListener(new StyledEditorKit.FontSizeAction("Change size", 24));
 
+        /* Adding some keybindings */
+        size24.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, KeyEvent.CTRL_DOWN_MASK));
 
         /* Text Panel */
 
@@ -98,6 +101,8 @@ class PanelProcesador extends JPanel {
 
         add(menuPanel, BorderLayout.NORTH);
         add(textPanel, BorderLayout.CENTER);
+
+        /* Popup menu */
 
         JPopupMenu popup = new JPopupMenu();
 
@@ -130,11 +135,13 @@ class PanelProcesador extends JPanel {
                 this.style.add(menuItem);
                 if (style == Font.BOLD) {
                     menuItem.addActionListener(new StyledEditorKit.BoldAction());
+                    menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_DOWN_MASK));
                 } else if ((style == Font.ITALIC)) {
                     menuItem.addActionListener(new StyledEditorKit.ItalicAction());
+                    menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K, KeyEvent.CTRL_DOWN_MASK));
                 }
             }
-            /* 
+            /* Sustituído con el JRadioMenuItem
             case "Tamaño" -> {
                 this.size.add(menuItem);
                 menuItem.addActionListener(new StyledEditorKit.FontSizeAction("Change size", size));

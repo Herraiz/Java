@@ -48,14 +48,14 @@ class PanelProcesador extends JPanel {
 
         /* Style submenu **/
         style = new JMenu("Estilo");
-//        menuConfig("Negrita", "Estilo", "", Font.BOLD, 1, "./src/gui/bold.png");
-//        menuConfig("Cursiva", "Estilo", "", Font.ITALIC, 1, "./src/gui/italic.png");
-        JCheckBoxMenuItem bold = new JCheckBoxMenuItem("Negrita", new ImageIcon("./src/gui/bold.png"));
-        JCheckBoxMenuItem italic = new JCheckBoxMenuItem("Cursiva", new ImageIcon("./src/gui/italic.png"));
-        style.add(bold);
-        style.add(italic);
-        bold.addActionListener(new StyledEditorKit.BoldAction());
-        italic.addActionListener(new StyledEditorKit.ItalicAction());
+        menuConfig("Negrita", "Estilo", "", Font.BOLD, 1, "./src/gui/bold.png");
+        menuConfig("Cursiva", "Estilo", "", Font.ITALIC, 1, "./src/gui/italic.png");
+//        JCheckBoxMenuItem bold = new JCheckBoxMenuItem("Negrita", new ImageIcon("./src/gui/bold.png"));
+//        JCheckBoxMenuItem italic = new JCheckBoxMenuItem("Cursiva", new ImageIcon("./src/gui/italic.png"));
+//        style.add(bold);
+//        style.add(italic);
+//        bold.addActionListener(new StyledEditorKit.BoldAction());
+//        italic.addActionListener(new StyledEditorKit.ItalicAction());
 
         /* Size submenu **/
         size = new JMenu("Tamaño");
@@ -98,6 +98,18 @@ class PanelProcesador extends JPanel {
 
         add(menuPanel, BorderLayout.NORTH);
         add(textPanel, BorderLayout.CENTER);
+
+        JPopupMenu popup = new JPopupMenu();
+
+        JMenuItem popupBold = new JMenuItem("Negrita", new ImageIcon("./src/gui/bold.png"));
+        JMenuItem popupItalic = new JMenuItem("Cursiva", new ImageIcon("./src/gui/italic.png"));
+        popup.add(popupBold);
+        popup.add(popupItalic);
+        popupBold.addActionListener(new StyledEditorKit.BoldAction());
+        popupItalic.addActionListener(new StyledEditorKit.ItalicAction());
+
+        textPanel.setComponentPopupMenu(popup);
+
     }
 
     public void menuConfig(String title, String menu, String font, int style, int size, String icon) {
@@ -114,7 +126,6 @@ class PanelProcesador extends JPanel {
                     menuItem.addActionListener(new StyledEditorKit.FontFamilyAction("Change size", "Courier"));
                 }
             }
-            /*
             case "Estilo" -> {
                 this.style.add(menuItem);
                 if (style == Font.BOLD) {
@@ -122,11 +133,12 @@ class PanelProcesador extends JPanel {
                 } else if ((style == Font.ITALIC)) {
                     menuItem.addActionListener(new StyledEditorKit.ItalicAction());
                 }
-            } */
+            }
+            /* 
             case "Tamaño" -> {
                 this.size.add(menuItem);
                 menuItem.addActionListener(new StyledEditorKit.FontSizeAction("Change size", size));
-            }
+            } */
         }
     }
 }

@@ -115,6 +115,23 @@ class PanelProcesador extends JPanel {
 
         textPanel.setComponentPopupMenu(popup);
 
+        /* Toolbar */
+        JToolBar toolBar = new JToolBar("Barra de herramientas", JToolBar.VERTICAL);
+
+        JButton boldButton = new JButton(new ImageIcon("./src/gui/bold.png"));
+        boldButton.addActionListener(new StyledEditorKit.BoldAction());
+        toolBar.add(boldButton);
+
+        JButton italicButton = new JButton(new ImageIcon("./src/gui/italic.png"));
+        italicButton.addActionListener(new StyledEditorKit.ItalicAction());
+        toolBar.add(italicButton);
+
+        JButton underlineButton = new JButton(new ImageIcon("./src/gui/underline.png"));
+        underlineButton.addActionListener(new StyledEditorKit.UnderlineAction());
+        toolBar.add(underlineButton);
+
+        add(toolBar, BorderLayout.WEST);
+
     }
 
     public void menuConfig(String title, String menu, String font, int style, int size, String icon) {

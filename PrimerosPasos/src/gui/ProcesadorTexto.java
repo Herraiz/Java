@@ -33,6 +33,11 @@ class PanelProcesador extends JPanel {
 
     JMenu font, style, size;
 
+    JButton boldButton, italicButton, underlineButton, redButton,
+            blueButton, yellowButton, leftButton, centerButton, rightButton, justifyButton;
+
+    JToolBar toolBar;
+
 
     public PanelProcesador() {
         setLayout(new BorderLayout());
@@ -52,19 +57,24 @@ class PanelProcesador extends JPanel {
         style = new JMenu("Estilo");
         menuConfig("Negrita", "Estilo", "", Font.BOLD, 1, "./src/gui/bold.png");
         menuConfig("Cursiva", "Estilo", "", Font.ITALIC, 1, "./src/gui/italic.png");
-//        JCheckBoxMenuItem bold = new JCheckBoxMenuItem("Negrita", new ImageIcon("./src/gui/bold.png"));
-//        JCheckBoxMenuItem italic = new JCheckBoxMenuItem("Cursiva", new ImageIcon("./src/gui/italic.png"));
-//        style.add(bold);
-//        style.add(italic);
-//        bold.addActionListener(new StyledEditorKit.BoldAction());
-//        italic.addActionListener(new StyledEditorKit.ItalicAction());
+        /* deprecated
+        JCheckBoxMenuItem bold = new JCheckBoxMenuItem("Negrita", new ImageIcon("./src/gui/bold.png"));
+        JCheckBoxMenuItem italic = new JCheckBoxMenuItem("Cursiva", new ImageIcon("./src/gui/italic.png"));
+        style.add(bold);
+        style.add(italic);
+        bold.addActionListener(new StyledEditorKit.BoldAction());
+        italic.addActionListener(new StyledEditorKit.ItalicAction());
+        */
+
 
         /* Size submenu **/
         size = new JMenu("Tamaño");
-//        menuConfig("12", "Tamaño", "", 9, 12, "");
-//        menuConfig("16", "Tamaño", "", 9, 16, "");
-//        menuConfig("20", "Tamaño", "", 9, 20, "");
-//        menuConfig("24", "Tamaño", "", 9, 24, "");
+        /* deprecated
+        menuConfig("12", "Tamaño", "", 9, 12, "");
+        menuConfig("16", "Tamaño", "", 9, 16, "");
+        menuConfig("20", "Tamaño", "", 9, 20, "");
+        menuConfig("24", "Tamaño", "", 9, 24, "");
+        */
 
         ButtonGroup fontSize = new ButtonGroup();
         JRadioButtonMenuItem size12 = new JRadioButtonMenuItem("12");
@@ -117,9 +127,11 @@ class PanelProcesador extends JPanel {
         textPanel.setComponentPopupMenu(popup);
 
         /* Toolbar */
+
+        /* DEPRECATED
         JToolBar toolBar = new JToolBar("Barra de herramientas", JToolBar.VERTICAL);
 
-        /* Style **/
+
         JButton boldButton = new JButton(new ImageIcon("./src/gui/bold.png"));
         boldButton.addActionListener(new StyledEditorKit.BoldAction());
         toolBar.add(boldButton);
@@ -132,7 +144,6 @@ class PanelProcesador extends JPanel {
         underlineButton.addActionListener(new StyledEditorKit.UnderlineAction());
         toolBar.add(underlineButton);
 
-        /* Colors **/
         JButton blueButton = new JButton(new ImageIcon("./src/gui/blue.png"));
         blueButton.addActionListener(new StyledEditorKit.ForegroundAction("blue", Color.BLUE));
         toolBar.add(blueButton);
@@ -145,7 +156,6 @@ class PanelProcesador extends JPanel {
         redButton.addActionListener(new StyledEditorKit.ForegroundAction("red", Color.RED));
         toolBar.add(redButton);
 
-        /* Allignment **/
 
         JButton leftButton = new JButton(new ImageIcon("./src/gui/left.png"));
         leftButton.addActionListener(new StyledEditorKit.AlignmentAction("left", StyleConstants.ALIGN_LEFT));
@@ -163,9 +173,30 @@ class PanelProcesador extends JPanel {
         justifyButton.addActionListener(new StyledEditorKit.AlignmentAction("justify", StyleConstants.ALIGN_JUSTIFIED));
         toolBar.add(justifyButton);
 
+        */
+
+        toolBar = new JToolBar("Barra de herramientas", JToolBar.VERTICAL);
+
+        toolBarConfig("./src/gui/bold.png").addActionListener(new StyledEditorKit.BoldAction());
+        toolBarConfig("./src/gui/italic.png").addActionListener(new StyledEditorKit.ItalicAction());
+        toolBarConfig("./src/gui/underline.png").addActionListener(new StyledEditorKit.UnderlineAction());
+        toolBar.addSeparator();
+        toolBarConfig("./src/gui/red.png").addActionListener(new StyledEditorKit.ForegroundAction("Red", Color.RED));
+        toolBarConfig("./src/gui/blue.png").addActionListener(new StyledEditorKit.ForegroundAction("Blue", Color.BLUE));
+        toolBarConfig("./src/gui/yellow.png").addActionListener(new StyledEditorKit.ForegroundAction("Yellow", Color.YELLOW));
+        toolBar.addSeparator();
+        toolBarConfig("./src/gui/left.png").addActionListener(new StyledEditorKit.AlignmentAction("left", StyleConstants.ALIGN_LEFT));
+        toolBarConfig("./src/gui/center.png").addActionListener(new StyledEditorKit.AlignmentAction("center", StyleConstants.ALIGN_CENTER));
+        toolBarConfig("./src/gui/right.png").addActionListener(new StyledEditorKit.AlignmentAction("right", StyleConstants.ALIGN_RIGHT));
+        toolBarConfig("./src/gui/justify.png").addActionListener(new StyledEditorKit.AlignmentAction("justify", StyleConstants.ALIGN_JUSTIFIED));
 
         add(toolBar, BorderLayout.WEST);
+    }
 
+    public JButton toolBarConfig(String route) {
+        JButton button = new JButton(new ImageIcon(route));
+        toolBar.add(button);
+        return button;
     }
 
     public void menuConfig(String title, String menu, String font, int style, int size, String icon) {

@@ -39,7 +39,8 @@ class PanelMuelle extends JPanel {
         add(button3);
 
         /* Springs (resortes o muelles) */
-        Spring mySpring = Spring.constant(0, 10, 100);
+        Spring borderSpring = Spring.constant(0, 10, 100);
+        Spring rigidSpring = Spring.constant(20);
 
         /* Como poner los muelles -> Se debe hacer de derecha a izquierda
         *   e1 – Anclaje del primer componente
@@ -49,10 +50,10 @@ class PanelMuelle extends JPanel {
             c2 – Segundo componente
         * */
 
-        myLayout.putConstraint(SpringLayout.WEST, button1, mySpring, SpringLayout.WEST, this); // entre marco izquierdo y botón 1
-        myLayout.putConstraint(SpringLayout.WEST, button2, mySpring, SpringLayout.WEST, button1); // entre botón 1 y 2
-        myLayout.putConstraint(SpringLayout.WEST, button3, mySpring, SpringLayout.WEST, button2); // entre botón 2 y botón 3
-        myLayout.putConstraint(SpringLayout.EAST, this, mySpring, SpringLayout.WEST, button3); // entre botón 3 y marco derecho
+        myLayout.putConstraint(SpringLayout.WEST, button1, borderSpring, SpringLayout.WEST, this); // entre marco izquierdo y botón 1
+        myLayout.putConstraint(SpringLayout.WEST, button2, rigidSpring, SpringLayout.EAST, button1); // entre botón 1 y 2
+        myLayout.putConstraint(SpringLayout.WEST, button3, rigidSpring, SpringLayout.EAST, button2); // entre botón 2 y botón 3
+        myLayout.putConstraint(SpringLayout.EAST, this, borderSpring, SpringLayout.EAST, button3); // entre botón 3 y marco derecho
 
 
     }

@@ -1,6 +1,7 @@
 package gui;
 
 import javax.swing.*;
+import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledEditorKit;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -118,6 +119,7 @@ class PanelProcesador extends JPanel {
         /* Toolbar */
         JToolBar toolBar = new JToolBar("Barra de herramientas", JToolBar.VERTICAL);
 
+        /* Style **/
         JButton boldButton = new JButton(new ImageIcon("./src/gui/bold.png"));
         boldButton.addActionListener(new StyledEditorKit.BoldAction());
         toolBar.add(boldButton);
@@ -129,6 +131,38 @@ class PanelProcesador extends JPanel {
         JButton underlineButton = new JButton(new ImageIcon("./src/gui/underline.png"));
         underlineButton.addActionListener(new StyledEditorKit.UnderlineAction());
         toolBar.add(underlineButton);
+
+        /* Colors **/
+        JButton blueButton = new JButton(new ImageIcon("./src/gui/blue.png"));
+        blueButton.addActionListener(new StyledEditorKit.ForegroundAction("blue", Color.BLUE));
+        toolBar.add(blueButton);
+
+        JButton yellowButton = new JButton(new ImageIcon("./src/gui/yellow.png"));
+        yellowButton.addActionListener(new StyledEditorKit.ForegroundAction("yellow", Color.YELLOW));
+        toolBar.add(yellowButton);
+
+        JButton redButton = new JButton(new ImageIcon("./src/gui/red.png"));
+        redButton.addActionListener(new StyledEditorKit.ForegroundAction("red", Color.RED));
+        toolBar.add(redButton);
+
+        /* Allignment **/
+
+        JButton leftButton = new JButton(new ImageIcon("./src/gui/left.png"));
+        leftButton.addActionListener(new StyledEditorKit.AlignmentAction("left", StyleConstants.ALIGN_LEFT));
+        toolBar.add(leftButton);
+
+        JButton centerButton = new JButton(new ImageIcon("./src/gui/center.png"));
+        centerButton.addActionListener(new StyledEditorKit.AlignmentAction("center", StyleConstants.ALIGN_CENTER));
+        toolBar.add(centerButton);
+
+        JButton rightButton = new JButton(new ImageIcon("./src/gui/right.png"));
+        rightButton.addActionListener(new StyledEditorKit.AlignmentAction("right", StyleConstants.ALIGN_RIGHT));
+        toolBar.add(rightButton);
+
+        JButton justifyButton = new JButton(new ImageIcon("./src/gui/justify.png"));
+        justifyButton.addActionListener(new StyledEditorKit.AlignmentAction("justify", StyleConstants.ALIGN_JUSTIFIED));
+        toolBar.add(justifyButton);
+
 
         add(toolBar, BorderLayout.WEST);
 

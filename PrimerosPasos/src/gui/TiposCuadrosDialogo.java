@@ -57,7 +57,6 @@ class LaminaCuadrosDialogos extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            // TODO Auto-generated method stub
 
             if (e.getSource() == boton1) {
                 JOptionPane.showMessageDialog(LaminaCuadrosDialogos.this,
@@ -68,14 +67,25 @@ class LaminaCuadrosDialogos extends JPanel {
             } else if (e.getSource() == boton2) {
                 String name = JOptionPane.showInputDialog(LaminaCuadrosDialogos.this,
                         "Introduce nombre",
-                        "Ventana emergente", 2);
+                        "Ventana emergente", JOptionPane.ERROR_MESSAGE);
                 System.out.println(name);
 
             } else if (e.getSource() == boton3) {
-
+                JOptionPane.showConfirmDialog(LaminaCuadrosDialogos.this,
+                        "Prueba ConfirmDialog",
+                        "Elige opción",
+                        JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
 
             } else {
 
+                JOptionPane.showOptionDialog(LaminaCuadrosDialogos.this,
+                        "Elige",
+                        "Prueba ShowOptionDialog",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE,
+                        null,
+                        null,
+                        null);
 
             }
 

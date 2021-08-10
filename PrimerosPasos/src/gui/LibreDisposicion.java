@@ -49,13 +49,16 @@ class PanelLibre extends JPanel {
         add(new JLabel("Edad: "));
         add(new JTextField());
 
+        add(new JLabel("Teléfono: "));
+        add(new JTextField());
+
     }
 
 }
 
 class EnColumnas implements LayoutManager {
 
-    private int x = 20;
+    private int x;
     private int y = 20;
 
     @Override
@@ -80,6 +83,8 @@ class EnColumnas implements LayoutManager {
 
     @Override
     public void layoutContainer(Container parent) {
+        int width = parent.getWidth();
+        x = width / 2;
         int counter = 0;
         int n = parent.getComponentCount();
 
@@ -88,14 +93,14 @@ class EnColumnas implements LayoutManager {
             counter++;
 
             Component comp = parent.getComponent(i);
-            comp.setBounds(x, y, 100, 20);
+            comp.setBounds(x - 100, y, 100, 20);
 
             /* Location magic - pairs */
 
             x += 80;
 
             if (counter % 2 == 0) {
-                x = 20;
+                x = width / 2;
                 y += 25;
             }
         }

@@ -2,6 +2,8 @@ package dialogos;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MarcoDialogos extends JFrame {
 
@@ -29,7 +31,6 @@ public class MarcoDialogos extends JFrame {
         confirmPanel = new PanelBotones("Confirmar", confirmOptions);
         panelGrid.add(confirmPanel);
 
-
         String[] messageTypeOptions = {"ERROR_MESSAGE", "INFORMATION_MESSAGE",
                 "WARNING_MESSAGE", "QUESTION_MESSAGE", "PLAIN_MESSAGE"};
         messagetypePanel = new PanelBotones("Confirmar", messageTypeOptions);
@@ -53,7 +54,26 @@ public class MarcoDialogos extends JFrame {
         showPanel.add(showButton);
         add(showPanel, BorderLayout.SOUTH);
 
+        showButton.addActionListener(AccionMostrar());
 
+
+    }
+
+    private ActionListener AccionMostrar() {
+       
+
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String type = typePanel.getSelection();
+                String messageType = messagetypePanel.getSelection();
+
+                String message = messagePanel.getSelection();
+                String confirm = confirmPanel.getSelection();
+                String option = optionPanel.getSelection();
+                String input = inputPanel.getSelection();
+            }
+        };
     }
 
 }

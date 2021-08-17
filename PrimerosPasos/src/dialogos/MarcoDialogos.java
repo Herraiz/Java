@@ -131,7 +131,7 @@ public class MarcoDialogos extends JFrame {
 
     public int getConfirmOption() {
 
-        // "DEFAULT_OPTION", "YES_NO_OPTION", "YES_NO_CANCEL_OPTION", "OK_CANCEL_OPCION"
+// "DEFAULT_OPTION", "YES_NO_OPTION", "YES_NO_CANCEL_OPTION", "OK_CANCEL_OPCION"
 
         String confirm = confirmPanel.getSelection();
 
@@ -158,6 +158,40 @@ public class MarcoDialogos extends JFrame {
 
     }
 
+    public Object[] getOption() {
+
+//        "String[]", "Icon[]", "Object[]"
+
+        String option = optionPanel.getSelection();
+
+        
+        switch (option) {
+            case "String[]" -> {
+
+                return new String[]{"Opción 1", "Opción 2", "Opción 3"};
+            }
+
+            case "Icon[]" -> {
+
+                Icon[] icons = {
+                        icon,
+                        new ImageIcon("src/gui/red.png"),
+                        new ImageIcon("src/gui/yellow.png")
+                };
+
+                return icons;
+            }
+
+            case "Object[]" -> {
+                return new Object[]{string, icon, object};
+            }
+
+        }
+
+        return null;
+
+    }
+
     private ActionListener AccionMostrar() {
 
         return new ActionListener() {
@@ -166,7 +200,6 @@ public class MarcoDialogos extends JFrame {
 
                 String type = typePanel.getSelection();
 
-                String option = optionPanel.getSelection();
                 String input = inputPanel.getSelection();
 
                 switch (type) {
@@ -196,7 +229,7 @@ public class MarcoDialogos extends JFrame {
                             getConfirmOption(),
                             getMessageType(),
                             null,
-                            null,
+                            getOption(),
                             null
                     );
                 }

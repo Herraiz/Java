@@ -4,11 +4,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 public class MarcoDialogos extends JFrame {
 
     private PanelBotones typePanel, messagetypePanel, confirmPanel,
             optionPanel, messagePanel, inputPanel;
+
+    private String string = "Mensaje";
+    private Icon icon = new ImageIcon("src/gui/blue.png");
+    private Object object = new Date();
+//    private Component component = new PanelEjemplo();
+
 
     public MarcoDialogos() {
 
@@ -56,15 +63,15 @@ public class MarcoDialogos extends JFrame {
 
         showButton.addActionListener(AccionMostrar());
 
-
     }
 
+
     private ActionListener AccionMostrar() {
-       
 
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 String type = typePanel.getSelection();
                 String messageType = messagetypePanel.getSelection();
 
@@ -72,6 +79,42 @@ public class MarcoDialogos extends JFrame {
                 String confirm = confirmPanel.getSelection();
                 String option = optionPanel.getSelection();
                 String input = inputPanel.getSelection();
+
+                if (type.equals("Mensaje")) {
+                    JOptionPane.showMessageDialog(
+                            MarcoDialogos.this,
+                            "Mensaje",
+                            "Título",
+                            0
+                    );
+                } else if (type.equals("Confirmar")) {
+                    JOptionPane.showConfirmDialog(
+                            MarcoDialogos.this,
+                            "Mensaje",
+                            "Título",
+                            0,
+                            0
+                    );
+                } else if (type.equals("Entrada")) {
+                    JOptionPane.showInputDialog(
+                            MarcoDialogos.this,
+                            "Mensaje",
+                            "Título",
+                            0
+                    );
+                } else if (type.equals("Opción")) {
+                    JOptionPane.showOptionDialog(
+                            MarcoDialogos.this,
+                            "Mensaje",
+                            "Título",
+                            0,
+                            0,
+                            null,
+                            null,
+                            null
+                    );
+                }
+
             }
         };
     }

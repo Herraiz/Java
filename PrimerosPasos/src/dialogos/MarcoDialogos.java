@@ -51,7 +51,7 @@ public class MarcoDialogos extends JFrame {
         messagePanel = new PanelBotones("Mensaje", messageOptions);
         panelGrid.add(messagePanel);
 
-        String[] inputOptions = {"Campo de texto", "Combo"};
+        String[] inputOptions = {"Campo de texto", "Combo", "Combo Iconos"};
         inputPanel = new PanelBotones("Entrada", inputOptions);
         panelGrid.add(inputPanel);
 
@@ -164,7 +164,7 @@ public class MarcoDialogos extends JFrame {
 
         String option = optionPanel.getSelection();
 
-        
+
         switch (option) {
             case "String[]" -> {
 
@@ -192,6 +192,40 @@ public class MarcoDialogos extends JFrame {
 
     }
 
+
+    public Object[] getInput() {
+
+//        "Campo de texto", "Combo", "Combo Iconos"
+
+        String input = inputPanel.getSelection();
+
+        switch (input) {
+            case "Campo de texto" -> {
+                return null;
+            }
+
+            case "Combo" -> {
+
+                return new String[]{"Amarillo", "Azul", "Rojo"};
+            }
+
+            case "Combo Iconos" -> {
+
+                Icon[] icons = {
+                        icon,
+                        new ImageIcon("src/gui/red.png"),
+                        new ImageIcon("src/gui/yellow.png")
+                };
+
+                return icons;
+            }
+
+        }
+
+        return null;
+
+    }
+
     private ActionListener AccionMostrar() {
 
         return new ActionListener() {
@@ -199,8 +233,6 @@ public class MarcoDialogos extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 String type = typePanel.getSelection();
-
-                String input = inputPanel.getSelection();
 
                 switch (type) {
                     case "Mensaje" -> JOptionPane.showMessageDialog(
@@ -220,7 +252,11 @@ public class MarcoDialogos extends JFrame {
                             MarcoDialogos.this,
                             getMessage(),
                             "Título",
-                            getMessageType()
+                            getMessageType(),
+                            null,
+                            getInput(),
+                            null
+
                     );
                     case "Opción" -> JOptionPane.showOptionDialog(
                             MarcoDialogos.this,

@@ -96,6 +96,68 @@ public class MarcoDialogos extends JFrame {
 
     }
 
+    public int getMessageType() {
+
+        // "ERROR_MESSAGE", "INFORMATION_MESSAGE","WARNING_MESSAGE", "QUESTION_MESSAGE", "PLAIN_MESSAGE"
+
+        String messageType = messagetypePanel.getSelection();
+
+        switch (messageType) {
+            case "ERROR_MESSAGE" -> {
+                return JOptionPane.ERROR_MESSAGE;
+            }
+
+            case "INFORMATION_MESSAGE" -> {
+                return JOptionPane.INFORMATION_MESSAGE;
+            }
+
+            case "WARNING_MESSAGE" -> {
+                return JOptionPane.WARNING_MESSAGE;
+            }
+
+            case "QUESTION_MESSAGE" -> {
+                return JOptionPane.QUESTION_MESSAGE;
+            }
+
+            case "PLAIN_MESSAGE" -> {
+                return JOptionPane.PLAIN_MESSAGE;
+            }
+
+        }
+
+        return 0;
+
+    }
+
+    public int getConfirmOption() {
+
+        // "DEFAULT_OPTION", "YES_NO_OPTION", "YES_NO_CANCEL_OPTION", "OK_CANCEL_OPCION"
+
+        String confirm = confirmPanel.getSelection();
+
+        switch (confirm) {
+            case "DEFAULT_OPTION" -> {
+                return JOptionPane.DEFAULT_OPTION;
+            }
+
+            case "YES_NO_OPTION" -> {
+                return JOptionPane.YES_NO_OPTION;
+            }
+
+            case "YES_NO_CANCEL_OPTION" -> {
+                return JOptionPane.YES_NO_CANCEL_OPTION;
+            }
+
+            case "OK_CANCEL_OPCION" -> {
+                return JOptionPane.OK_CANCEL_OPTION;
+            }
+
+        }
+
+        return 0;
+
+    }
+
     private ActionListener AccionMostrar() {
 
         return new ActionListener() {
@@ -103,9 +165,7 @@ public class MarcoDialogos extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 String type = typePanel.getSelection();
-                String messageType = messagetypePanel.getSelection();
 
-                String confirm = confirmPanel.getSelection();
                 String option = optionPanel.getSelection();
                 String input = inputPanel.getSelection();
 
@@ -114,27 +174,27 @@ public class MarcoDialogos extends JFrame {
                             MarcoDialogos.this,
                             getMessage(),
                             "Título",
-                            0
+                            getMessageType()
                     );
                     case "Confirmar" -> JOptionPane.showConfirmDialog(
                             MarcoDialogos.this,
                             getMessage(),
                             "Título",
-                            0,
-                            0
+                            getConfirmOption(),
+                            getMessageType()
                     );
                     case "Entrada" -> JOptionPane.showInputDialog(
                             MarcoDialogos.this,
                             getMessage(),
                             "Título",
-                            0
+                            getMessageType()
                     );
                     case "Opción" -> JOptionPane.showOptionDialog(
                             MarcoDialogos.this,
                             getMessage(),
                             "Título",
-                            0,
-                            0,
+                            getConfirmOption(),
+                            getMessageType(),
                             null,
                             null,
                             null

@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Rectangle2D;
 import java.util.Date;
 
 public class MarcoDialogos extends JFrame {
@@ -14,8 +15,7 @@ public class MarcoDialogos extends JFrame {
     private String string = "Mensaje";
     private Icon icon = new ImageIcon("src/gui/blue.png");
     private Object object = new Date();
-//    private Component component = new PanelEjemplo();
-
+    private Component component = new PanelEjemplo();
 
     public MarcoDialogos() {
 
@@ -65,6 +65,36 @@ public class MarcoDialogos extends JFrame {
 
     }
 
+    public Object getMessage() {
+
+        String message = messagePanel.getSelection();
+
+        switch (message) {
+            case "Cadena" -> {
+                return string;
+            }
+
+            case "Icono" -> {
+                return icon;
+            }
+
+            case "Componente" -> {
+                return component;
+            }
+
+            case "Otros" -> {
+                return object;
+            }
+
+            case "Object[]" -> {
+                return new Object[]{string, icon, component, object};
+            }
+
+        }
+
+        return null;
+
+    }
 
     private ActionListener AccionMostrar() {
 
@@ -75,37 +105,33 @@ public class MarcoDialogos extends JFrame {
                 String type = typePanel.getSelection();
                 String messageType = messagetypePanel.getSelection();
 
-                String message = messagePanel.getSelection();
                 String confirm = confirmPanel.getSelection();
                 String option = optionPanel.getSelection();
                 String input = inputPanel.getSelection();
 
-                if (type.equals("Mensaje")) {
-                    JOptionPane.showMessageDialog(
+                switch (type) {
+                    case "Mensaje" -> JOptionPane.showMessageDialog(
                             MarcoDialogos.this,
-                            "Mensaje",
+                            getMessage(),
                             "Título",
                             0
                     );
-                } else if (type.equals("Confirmar")) {
-                    JOptionPane.showConfirmDialog(
+                    case "Confirmar" -> JOptionPane.showConfirmDialog(
                             MarcoDialogos.this,
-                            "Mensaje",
+                            getMessage(),
                             "Título",
                             0,
                             0
                     );
-                } else if (type.equals("Entrada")) {
-                    JOptionPane.showInputDialog(
+                    case "Entrada" -> JOptionPane.showInputDialog(
                             MarcoDialogos.this,
-                            "Mensaje",
+                            getMessage(),
                             "Título",
                             0
                     );
-                } else if (type.equals("Opción")) {
-                    JOptionPane.showOptionDialog(
+                    case "Opción" -> JOptionPane.showOptionDialog(
                             MarcoDialogos.this,
-                            "Mensaje",
+                            getMessage(),
                             "Título",
                             0,
                             0,
@@ -119,4 +145,13 @@ public class MarcoDialogos extends JFrame {
         };
     }
 
+    class PanelEjemplo extends JPanel {
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            Graphics2D g2 = (Graphics2D) g;
+            Rectangle2D rect = new Rectangle2D.Double(0, 0, getWidth(), getHeight());
+            g2.setPaint(Color.YELLOW);
+            g2.fill(rect);
+        }
+    }
 }

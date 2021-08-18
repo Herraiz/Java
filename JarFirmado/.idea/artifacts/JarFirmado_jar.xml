@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="JarFirmado:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/JarFirmado_jar</output-path>
+    <root id="archive" name="JarFirmado.jar">
+      <element id="module-output" name="JarFirmado" />
+      <element id="dir-copy" path="$PROJECT_DIR$/res" />
+    </root>
+  </artifact>
+</component>

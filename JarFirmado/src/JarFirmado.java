@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public class JarFirmado {
 
@@ -29,10 +30,11 @@ class PanelJar extends JPanel {
 
     Toolkit myScreen = Toolkit.getDefaultToolkit();
 
-//    Image image = myScreen.getImage("res/logo.png");
-
     /* Así podemos cargar recursos desde nuestra carpeta de recursos */
-    Image image = myScreen.getImage(getClass().getClassLoader().getResource("logo.png"));
+    /* Hay que definir antes una carpeta recursos desde Project Structure*/
+
+    URL path = PanelJar.class.getResource("logo.png");
+    Image image = myScreen.getImage(path);
 
     @Override
     protected void paintComponent(Graphics g) {

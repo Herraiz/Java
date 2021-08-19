@@ -52,6 +52,8 @@ class PanelConImagenes extends JPanel {
 
         super.paintComponent(g);
 
+        /* Controlamos el posible error de Runtime evitando "a mano" que se ejecute el código si image es null */
+
         if (image == null) {
             g.drawString("No podemos cargar la imagen", 10, 10);
         } else {
@@ -73,4 +75,30 @@ class PanelConImagenes extends JPanel {
         }
     }
 
+
+    /* Forma incorrecta de hacerlo, lanzar una excepción
+
+    public void paintComponent(Graphics g) throws NullPointerException {
+
+        super.paintComponent(g);
+
+        try {
+
+            int width = image.getWidth(this);
+            int height = image.getHeight(this);
+            g.drawImage(image, 0, 0, null);
+
+
+            for (int dx = 0; dx < 2000; dx += width) {
+                for (int dy = 0; dy < 2000; dy += height) {
+
+                    if (dx + dy > 0) {
+                        g.copyArea(0, 0, width, height, dx, dy);
+                    }
+                }
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Error detectado: " + e);
+        }
+    } */
 }

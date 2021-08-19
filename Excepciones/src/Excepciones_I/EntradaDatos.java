@@ -16,7 +16,15 @@ public class EntradaDatos {
         int decision = entrada.nextInt();
 
         if (decision == 1) {
-            pedirDatos();
+
+            /* Lo correcto a la hora de ponerle un throw a una clase es capturar el error que devuelve la clase.
+            FUERA de la clase */
+
+            try {
+                pedirDatos();
+            } catch (InputMismatchException e) {
+                System.out.println("Error detectado: " + e);
+            }
 
         } else {
             System.out.println("Adiós");
@@ -31,7 +39,7 @@ public class EntradaDatos {
 
         /* Si no va bien el método, lanzará el objeto InputMismatchException */
 
-        try {
+//        try {
 
             Scanner entrada = new Scanner(System.in);
 
@@ -41,11 +49,11 @@ public class EntradaDatos {
             System.out.println("Introduce edad, por favor");
             int edad = entrada.nextInt();
 
-            System.out.println("Hola " + nombre_usuario + ". El a�o que viene tendrás " + (edad + 1) + " años");
+            System.out.println("Hola " + nombre_usuario + ". El año que viene tendrás " + (edad + 1) + " años");
             entrada.close();
-        } catch (InputMismatchException e) { // o Exception y funcionará con cualquier error
-            System.out.println("Error detectado: " + e);
-        }
+//        } catch (InputMismatchException e) { // o Exception y funcionará con cualquier error
+//            System.out.println("Error detectado: " + e);
+//        }
 
         System.out.println("Hemos terminado.");
 

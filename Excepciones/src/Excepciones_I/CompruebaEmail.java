@@ -27,6 +27,8 @@ public class CompruebaEmail {
             checkEmail(email);
         } catch (IncorrectMailLength e) {
             System.out.println("Error detectado: " + e.getMessage());
+            /* También puedes usar el print stack trace */
+            e.printStackTrace();
         }
 
     }

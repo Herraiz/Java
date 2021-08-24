@@ -26,6 +26,7 @@ class ReadFile {
 
         } catch (IOException e) {
             System.out.println("No se ha encontrado el archivo");
+
         }
 
     }

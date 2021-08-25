@@ -6,6 +6,7 @@ import java.util.GregorianCalendar;
 
 public class Serializando {
 
+
     public static void main(String[] args) {
 
         Administrador jefe = new Administrador("Juan", 80000, 2005, 12, 15);
@@ -39,7 +40,7 @@ public class Serializando {
 
         } catch (Exception e) {
 
-            System.out.println("El fichero no existe");
+            e.printStackTrace();
 
         }
 
@@ -51,16 +52,17 @@ public class Serializando {
 
 class Empleado implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = 2L;
+
     private String nombre;
-
     private double sueldo;
-
     private Date fechaContrato;
 
 
     public Empleado(String n, double s, int agno, int mes, int dia){
         nombre=n;
-        sueldo=s;
+        sueldo =s;
         GregorianCalendar calendario=new GregorianCalendar(agno, mes-1,dia);
         fechaContrato=calendario.getTime();
 
@@ -82,8 +84,8 @@ class Empleado implements Serializable {
 
     public void subirSueldo(double porcentaje){
 
-        double aumento=sueldo*porcentaje/100;
-        sueldo+=aumento;
+        double aumento= sueldo *porcentaje/100;
+        sueldo +=aumento;
 
     }
 
@@ -98,6 +100,9 @@ class Empleado implements Serializable {
 
 
 class Administrador extends Empleado{
+
+    @Serial
+    private static final long serialVersionUID = 2L;
 
     private double incentivo;
 

@@ -39,6 +39,21 @@ public class UsoEmpleado {
 
         System.out.println("El tamaño de la lista es: " + listaEmpleados.size());
 
+        /* Los métodos get y set nos permiten obtener un elemento concreto y modificarlo respectivamente */
+
+        System.out.println(listaEmpleados.get(0).getData());
+        listaEmpleados.set(0, new Empleado("Tanausú", 29, 2000));
+        System.out.println(listaEmpleados.get(0).getData() + "\n");
+
+        /* También podemos exportarlo a un array normal */
+
+        Empleado[] arrayEmpleado = new Empleado[listaEmpleados.size()];
+        listaEmpleados.toArray(arrayEmpleado);
+
+        for (Empleado e: arrayEmpleado) {
+            System.out.println(e.getData());
+        }
+
     }
 
 }

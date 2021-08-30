@@ -33,9 +33,23 @@ public class UsoEmpleado {
         listaEmpleados.trimToSize(); // "Cierra" el array y ahorra memoria
 
 
+        /*
         for (Empleado e: listaEmpleados) {
+
             System.out.println(e.getData());
         }
+
+         */
+
+        /* Creamos el iterador y lo usamos */
+
+        Iterator <Empleado> myIterator = listaEmpleados.iterator();
+
+        while (myIterator.hasNext()) {
+            System.out.println(myIterator.next().getData());
+        }
+
+
 
         System.out.println("El tamaño de la lista es: " + listaEmpleados.size());
 

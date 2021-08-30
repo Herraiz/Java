@@ -29,6 +29,8 @@ public class UsoEmpleado {
         listaEmpleados.add(new Empleado("Antonio", 55, 2000));
         listaEmpleados.add(new Empleado("María", 25, 2600));
         listaEmpleados.add(new Empleado("Antonio María", 22, 2100));
+        /* Al usar programación genérica nos marca un error en tiempo de compilación
+        listaEmpleados.add("Paco"); */
 
         listaEmpleados.trimToSize(); // "Cierra" el array y ahorra memoria
 

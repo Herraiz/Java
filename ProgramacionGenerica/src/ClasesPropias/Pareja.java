@@ -1,4 +1,4 @@
-package ArrayList;
+package ClasesPropias;
 
 public class Pareja<T> {
 

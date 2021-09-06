@@ -1,4 +1,4 @@
-package ArrayList;
+package ClasesPropias;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -50,7 +50,7 @@ class MisMatrices {
     }
 
     /* Método genérico que devuelve un genérico */
-    /* Necesitamos que los objetos T sean comparables, así que hacemos que hereden de Comparable
+    /* Necesitamos que los objetos T sean comparables, así que hacemos que hereden de Comparable, pese a que es una interfaz
     * Esto se hace en la declaración del método por ser genérico */
     public static <T extends Comparable> T getMenor(T[]a){
         if (a.length == 0 || a == null) {

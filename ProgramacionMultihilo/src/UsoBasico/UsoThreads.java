@@ -22,6 +22,39 @@ public class UsoThreads {
 
 }
 
+class PelotaHilos implements Runnable {
+
+    /* Preparamos la clase para que el programa sea multihilo
+    * 1) Hacemos que la clase implemente la interfaz Runnable
+    * 2) Metemos toda la lógica de la tarea en el método run()
+    * 3) Continuamos en comienza_el_juego()*/
+
+    private Pelota pelota;
+    private Component component;
+
+    public PelotaHilos(Pelota unaPelota, Component unComponente){
+
+        this.pelota = unaPelota;
+        this.component = unComponente;
+
+    }
+
+    @Override
+    public void run() {
+        for (int i = 1; i <= 3000; i++) {
+
+            pelota.mueve_pelota(component.getBounds());
+            component.paint(component.getGraphics());
+            try {
+                sleep(4);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+}
+
 
 //Movimiento de la pelota-----------------------------------------------------------------------------------------
 
@@ -170,18 +203,18 @@ class MarcoRebote extends JFrame {
 
         lamina.add(pelota);
 
-        for (int i = 1; i <= 3000; i++) {
+        /* Importante para hacer multithreading */
 
-            pelota.mueve_pelota(lamina.getBounds());
-            lamina.paint(lamina.getGraphics());
-            try {
-                sleep(4);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        /* Preparamos la clase para que el programa sea multihilo
+         * 1) y 2) en PelotaHilos
+         * 3) Instanciamos la clase en una variable tipo Runnable
+         * 4) Creamos una instancia de hilo y le pasamos el Runnable
+         * 5) Comenzamos el hilo con start()
+         * */
 
-        }
-
+        Runnable r = new PelotaHilos(pelota, lamina);
+        Thread t = new Thread(r);
+        t.start();
 
     }
 

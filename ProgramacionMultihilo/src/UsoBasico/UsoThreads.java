@@ -8,15 +8,14 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
+import static java.lang.Thread.sleep;
+
 public class UsoThreads {
 
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
 
         JFrame marco = new MarcoRebote();
-
         marco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         marco.setVisible(true);
 
     }
@@ -42,34 +41,25 @@ class Pelota {
     public void mueve_pelota(Rectangle2D limites) {
 
         x += dx;
-
         y += dy;
 
         if (x < limites.getMinX()) {
-
             x = limites.getMinX();
-
             dx = -dx;
         }
 
         if (x + xSize >= limites.getMaxX()) {
-
             x = limites.getMaxX() - xSize;
-
             dx = -dx;
         }
 
         if (y < limites.getMinY()) {
-
             y = limites.getMinY();
-
             dy = -dy;
         }
 
         if (y + ySize >= limites.getMaxY()) {
-
             y = limites.getMaxY() - ySize;
-
             dy = -dy;
 
         }
@@ -85,12 +75,12 @@ class Pelota {
 
 }
 
-// L�mina que dibuja las pelotas----------------------------------------------------------------------
+// Lámina que dibuja las pelotas----------------------------------------------------------------------
 
 
 class LaminaPelota extends JPanel {
 
-    //A�adimos pelota a la l�mina
+    //Añadimos pelota a la lámina
 
     private final ArrayList<Pelota> pelotas = new ArrayList<Pelota>();
 
@@ -109,6 +99,9 @@ class LaminaPelota extends JPanel {
 
             g2.fill(b.getShape());
         }
+
+        // Asegura que el objeto gráfico se actualiza
+        Toolkit.getDefaultToolkit().sync();
 
     }
 }
@@ -158,7 +151,7 @@ class MarcoRebote extends JFrame {
         add(laminaBotones, BorderLayout.SOUTH);
     }
 
-    //A�ade pelota y la bota 1000 veces
+    //Añade pelota y la bota 1000 veces
 
     public void ponerBoton(Container c, String titulo, ActionListener oyente) {
 
@@ -180,8 +173,12 @@ class MarcoRebote extends JFrame {
         for (int i = 1; i <= 3000; i++) {
 
             pelota.mueve_pelota(lamina.getBounds());
-
             lamina.paint(lamina.getGraphics());
+            try {
+                sleep(4);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
         }
 

@@ -17,5 +17,12 @@ public class Pareja<T> {
     public T getPrimero() {
         return primero;
     }
+
+    /* Permitimos al método trabajar con instancias de Empleado y que heredan de ella */
+    public static void printEmployee(Pareja<? extends Empleado> p) {
+        Empleado primero = p.getPrimero();
+        System.out.println(primero);
+    }
+
 }
 

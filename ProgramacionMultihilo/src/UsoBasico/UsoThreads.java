@@ -41,17 +41,34 @@ class PelotaHilos implements Runnable {
 
     @Override
     public void run() {
-        for (int i = 1; i <= 3000; i++) {
+
+        System.out.println("Estado del hilo al comenzar: " + !Thread.currentThread().isInterrupted());
+
+        /*for (int i = 1; i <= 3000; i++) {*/
+
+        // while(!Thread.interrupted()) {
+
+        while(!Thread.currentThread().isInterrupted()) {
 
             pelota.mueve_pelota(component.getBounds());
-            component.paint(component.getGraphics());
+            component.repaint();
+
+            /* Vamos a hacer cambios para permitir la interrupción del hilo
             try {
-                sleep(4);
+
+                sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                System.out.println("Hilo bloqueado, imposible su interrupción");
             }
+            */
+
+            component.repaint();
 
         }
+
+        System.out.println("Estado del hilo al finalizar: " + !Thread.currentThread().isInterrupted());
+
     }
 }
 
@@ -145,6 +162,7 @@ class LaminaPelota extends JPanel {
 class MarcoRebote extends JFrame {
 
     private final LaminaPelota lamina;
+    private Thread t;
 
 
     //Ponemos botones
@@ -176,6 +194,16 @@ class MarcoRebote extends JFrame {
             public void actionPerformed(ActionEvent evento) {
 
                 System.exit(0);
+
+            }
+
+        });
+
+        ponerBoton(laminaBotones, "Detener", new ActionListener() {
+
+            public void actionPerformed(ActionEvent evento) {
+
+                detener();
 
             }
 
@@ -213,9 +241,17 @@ class MarcoRebote extends JFrame {
          * */
 
         Runnable r = new PelotaHilos(pelota, lamina);
-        Thread t = new Thread(r);
+        t = new Thread(r);
         t.start();
 
+    }
+
+    public void detener(){
+
+        /* Deprecated
+        t.stop();  */
+
+        t.interrupt();;
     }
 
 

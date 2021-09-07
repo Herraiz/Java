@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ProgramacionMultihilo.iml" filepath="$PROJECT_DIR$/ProgramacionMultihilo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ProgramacionConcurrente.iml" filepath="$PROJECT_DIR$/ProgramacionConcurrente.iml" />
     </modules>
   </component>
 </project>

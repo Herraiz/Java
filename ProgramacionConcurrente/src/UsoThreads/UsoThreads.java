@@ -1,4 +1,4 @@
-package UsoBasico;
+package UsoThreads;
 
 import javax.swing.*;
 import java.awt.*;

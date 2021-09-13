@@ -2,6 +2,8 @@ package UsoThreads;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class BancoSinSincronizar {
 
@@ -9,6 +11,7 @@ public class BancoSinSincronizar {
 
         Banco banco = new Banco();
 
+        /* Creamos 100 hilos, uno para cada cuenta de origen que irá transfiriendo dinero a cuentas random */
         for (int i = 0; i<100; i++) {
             EjecucionTransferencias r = new EjecucionTransferencias(banco, i, 2000);
             Thread t = new Thread(r);
@@ -20,6 +23,7 @@ public class BancoSinSincronizar {
 class Banco {
 
     private final double[] cuentas;
+    private Lock cierreBanco = new ReentrantLock();
 
     public Banco() {
         cuentas = new double[100];
@@ -30,17 +34,27 @@ class Banco {
 
     public void transferencia(int origen, int destino, double cantidad) {
 
-        if (cuentas[origen] < cantidad) {
-            return;
+        /* Vamos a usar un lock (imagino que un semáforo binario para impedir dos hilos ejecuten el código a la vez
+        * Además, le hacemos un surround con un try-finally para desbloquearlo */
+        cierreBanco.lock();
+
+        try {
+
+            if (cuentas[origen] < cantidad) {
+                return;
+            }
+
+            System.out.println("Iniciando transferencia en " + Thread.currentThread().getName());
+
+            cuentas[origen] -= cantidad;
+            System.out.printf("Transferencia de %10.2f € de %d para %d ", cantidad, origen, destino);
+            cuentas[destino] += cantidad;
+
+            System.out.printf("\nSaldo total: %10.2f%n", getSaldoTotal());
+
+        } finally {
+            cierreBanco.unlock();
         }
-
-        System.out.println("Iniciando transferencia en " + Thread.currentThread().getName());
-
-        cuentas[origen] -= cantidad;
-        System.out.printf("Transferencia de %10.2f € de %d para %d ", cantidad, origen, destino);
-        cuentas[destino] += cantidad;
-
-        System.out.printf("\nSaldo total: %10.2f%n", getSaldoTotal());
 
     }
 

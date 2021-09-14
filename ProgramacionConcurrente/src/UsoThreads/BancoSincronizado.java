@@ -24,32 +24,32 @@ public class BancoSincronizado {
 class Banco2 {
 
     private final double[] cuentas;
-    private Lock cierreBanco = new ReentrantLock();
-    private Condition saldoSuficiente;
+//    private Lock cierreBanco = new ReentrantLock();
+//    private Condition saldoSuficiente;
 
     public Banco2() {
         cuentas = new double[100];
 
         Arrays.fill(cuentas, 2000);
 
-        saldoSuficiente = cierreBanco.newCondition();
+//        saldoSuficiente = cierreBanco.newCondition();
 
     }
 
-    public void transferencia(int origen, int destino, double cantidad) throws InterruptedException {
+    public synchronized void transferencia(int origen, int destino, double cantidad) throws InterruptedException {
 
-        /* Vamos a usar un lock (imagino que un semáforo binario para impedir dos hilos ejecuten el código a la vez
-         * Además, le hacemos un surround con un try-finally para desbloquearlo */
+        /* En este ejemplo, como solo tenemos UNA CONDICIÓN de bloqueo usaremos la palabra reservada syncronized
+        * y los métodos wait() y notifyALl() */
 
-        /* Y también crearemos una condición de bloqueo */
+//        cierreBanco.lock();
 
-        cierreBanco.lock();
-
-        try {
+//        try {
 
             while (cuentas[origen] < cantidad) {
 
-                saldoSuficiente.await(); // no hay suficiente saldo, mandamos el hilo a espera
+//                saldoSuficiente.await(); // no hay suficiente saldo, mandamos el hilo a espera
+
+                wait();
 
                 System.out.println("No hay suficiente saldo en la cuenta " + origen + ". Poniendo hilo a la espera");
 
@@ -63,14 +63,15 @@ class Banco2 {
 
             System.out.printf("\nSaldo total: %10.2f%n", getSaldoTotal());
 
-            saldoSuficiente.signalAll(); // desbloqueamos el resto de hilos para que vuelvan a comprobar
+//            saldoSuficiente.signalAll(); // desbloqueamos el resto de hilos para que vuelvan a comprobar
+            notifyAll();
 
 
-        } finally {
+        } /* finally {
             cierreBanco.unlock();
         }
 
-    }
+    } */
 
     public double getSaldoTotal(){
         double sumaCuentas = 0;

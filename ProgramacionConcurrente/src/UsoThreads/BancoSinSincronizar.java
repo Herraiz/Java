@@ -2,6 +2,7 @@ package UsoThreads;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -24,15 +25,18 @@ class Banco {
 
     private final double[] cuentas;
     private Lock cierreBanco = new ReentrantLock();
+    private Condition saldoSuficiente;
 
     public Banco() {
         cuentas = new double[100];
 
         Arrays.fill(cuentas, 2000);
 
+        saldoSuficiente = cierreBanco.newCondition();
+
     }
 
-    public void transferencia(int origen, int destino, double cantidad) {
+    public void transferencia(int origen, int destino, double cantidad) throws InterruptedException {
 
         /* Vamos a usar un lock (imagino que un semáforo binario para impedir dos hilos ejecuten el código a la vez
         * Además, le hacemos un surround con un try-finally para desbloquearlo */
@@ -43,13 +47,12 @@ class Banco {
 
         try {
 
-            if (cuentas[origen] < cantidad) {
+            while (cuentas[origen] < cantidad) {
 
-                System.out.println("Cantidad insuficiente: " + origen + " ..... Saldo: " + cuentas[origen] + " €. La transferencia era de " + cantidad + " €");
+                saldoSuficiente.await(); // no hay suficiente saldo, mandamos el hilo a espera
 
-                return;
-            } else {
-                System.out.println("Cantidad OK. Cuenta: " + origen);
+                System.out.println("No hay suficiente saldo en la cuenta " + origen + ". Poniendo hilo a la espera");
+
             }
 
             System.out.println("Iniciando transferencia en " + Thread.currentThread().getName());
@@ -59,6 +62,9 @@ class Banco {
             cuentas[destino] += cantidad;
 
             System.out.printf("\nSaldo total: %10.2f%n", getSaldoTotal());
+
+            saldoSuficiente.signalAll(); // desbloqueamos el resto de hilos para que vuelvan a comprobar
+
 
         } finally {
             cierreBanco.unlock();

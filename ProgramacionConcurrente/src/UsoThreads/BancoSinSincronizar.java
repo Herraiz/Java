@@ -36,12 +36,20 @@ class Banco {
 
         /* Vamos a usar un lock (imagino que un semáforo binario para impedir dos hilos ejecuten el código a la vez
         * Además, le hacemos un surround con un try-finally para desbloquearlo */
+
+        /* Y también crearemos una condición de bloqueo */
+
         cierreBanco.lock();
 
         try {
 
             if (cuentas[origen] < cantidad) {
+
+                System.out.println("Cantidad insuficiente: " + origen + " ..... Saldo: " + cuentas[origen] + " €. La transferencia era de " + cantidad + " €");
+
                 return;
+            } else {
+                System.out.println("Cantidad OK. Cuenta: " + origen);
             }
 
             System.out.println("Iniciando transferencia en " + Thread.currentThread().getName());

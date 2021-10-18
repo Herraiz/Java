@@ -36,9 +36,23 @@ public class PruebaTreeSet {
             System.out.println(articulo.getDesc());
         }
 
+        /* Forma antigua de hacerlo, implementando en nuestro objeto la interfaz Comparator
         Articulo comparadorArticulos = new Articulo();
 
         TreeSet <Articulo> ordenaArticulos2 = new TreeSet<>(comparadorArticulos);
+
+        ComparadorArticulos comparaArt = new ComparadorArticulos(); */
+
+        /* Creamos una clase interna anónima como comparador */
+
+        TreeSet <Articulo> ordenaArticulos2 = new TreeSet<>(new Comparator<Articulo>() {
+            @Override
+            public int compare(Articulo o1, Articulo o2) {
+                String descripcion1 = o1.getDesc();
+                String descripcion2 = o2.getDesc();
+                return descripcion1.compareTo(descripcion2); // comparación alfabética
+            }
+        });
 
         ordenaArticulos2.add(primero);
         ordenaArticulos2.add(segundo);
@@ -50,17 +64,15 @@ public class PruebaTreeSet {
         for (Articulo art: ordenaArticulos2) {
             System.out.println(art.getDesc());
         }
-        
+
     }
 
 }
 
-class Articulo implements Comparable<Articulo>, Comparator<Articulo> {
+class Articulo implements Comparable<Articulo> {
 
     private int num;
     private String desc;
-
-    public Articulo(){}
 
     public Articulo(int num, String desc){
 
@@ -78,10 +90,10 @@ class Articulo implements Comparable<Articulo>, Comparator<Articulo> {
         return desc;
     }
 
-    @Override
+    /* @Override
     public int compare(Articulo o1, Articulo o2) {
         String descripcion1 = o1.getDesc();
         String descripcion2 = o2.getDesc();
         return descripcion1.compareTo(descripcion2); // comparación alfabética
-    }
+    } */
 }
